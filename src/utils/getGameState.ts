@@ -1,8 +1,9 @@
 import calculateWinner from './calculateWinner';
+import type { gameStateType, squaresType } from '../types/types';
 /**
  * Processes a move and returns the updated game state.
  */
-function getGameState(squares: (string | null)[]): { status: string; winner?: string }   {
+function getGameState(squares: squaresType): gameStateType {
   const winner = calculateWinner(squares);
   
   if (winner) {
