@@ -113,7 +113,7 @@ h4 {
   gap: 0.2rem;
   padding: 0.5rem;
   background-color: var(--color-slate-900);
-  width: 421px;
+  width: 430px;
   border-radius: 1rem;
 }
 
@@ -121,6 +121,9 @@ h4 {
   width: 100%;
   padding: 0.7rem;
   border-radius: 0.8rem;
+  border: none;
+  background: transparent;
+  cursor: pointer;
 }
 .o img {
   filter: brightness(0) invert(93%) sepia(5%) saturate(882%) hue-rotate(167deg)
@@ -164,20 +167,60 @@ h4 {
 .menu-btn.cpu {
   background-color: var(--color-amber-400);
 }
-.menu-btn.player{
+.menu-btn.player {
   margin-top: -1rem;
   background-color: var(--color-teal-400);
-
 }
-
-@media (max-width: 500px){
-.mark-icons,
-.mark{
+.game {
+  width: 461px;
+}
+.head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   width: 100%;
 }
-.menu{
-  width: 100%;
-padding: 1rem;
+.head img {
+  height: 2rem;
+  width: auto;
 }
-
+.turn img {
+  height: 1.3rem;
+  filter: brightness(0) invert(93%) sepia(5%) saturate(882%) hue-rotate(167deg)
+    brightness(101%) contrast(88%);
+}
+.turn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  background-color: var(--color-slate-850);
+  border-radius: 0.8rem;
+  font: var(--preset-4);
+  letter-spacing: var(--ls-4);
+  padding: 0.8rem 1.5rem;
+  color: var(--color-slate-300);
+}
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 1rem;
+  width: 100%;
+  height: auto;
+}
+.board .cell {
+  background-color: var(--color-slate-800);
+  padding: 1rem;
+  border-radius: 0.7rem;
+}
+@media (max-width: 500px) {
+  .mark-icons,
+  .mark {
+    width: 100%;
+  }
+  .menu {
+    width: 100%;
+    padding: 1rem;
+  }
 }
