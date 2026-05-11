@@ -29,7 +29,6 @@ export default function Game({
     setSquares(newSquares);
 
     // 3. Switch turn
-    setTurn(turn === "x" ? "o" : "x");
   }
 
   // Handle Game State Logic whenever squares change
@@ -40,6 +39,9 @@ export default function Game({
       const state = getGameState(squares);
       setGameState(state);
       console.log(state);
+      if (state.status === "ongoing") {
+        setTurn(turn === "x" ? "o" : "x");
+      }
     }
     // Note: Don't reset squares here automatically if you want
     // the user to see the "Winner" screen!
