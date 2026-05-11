@@ -1,35 +1,92 @@
-import type { gameStateType } from "../types/types";
+import { useEffect, useState } from "react";
+import type { gameStateType, squaresType, playType } from "../types/types";
+import isNulled from "../utils/isNulled";
+import getGameState from "../utils/getGameState";
 
 export default function Game({
   gameState,
   setGameState,
+  squares,
+  setSquares,
+  play,
+  setPlay,
 }: {
   gameState: gameStateType;
   setGameState: React.Dispatch<React.SetStateAction<gameStateType>>;
+  squares: squaresType;
+  setSquares: React.Dispatch<React.SetStateAction<squaresType>>;
+  play: playType;
+  setPlay: React.Dispatch<React.SetStateAction<playType>>;
 }) {
+  const [turn, setTurn] = useState<string>("x");
+  function handleClick(index: number) {
+    // 1. Guard clause: Stop if square is filled or game is over
+    if (squares[index] || gameState.status !== "ongoing") return;
+
+    // 2. Update the board
+    const newSquares = [...squares];
+    newSquares[index] = turn;
+    setSquares(newSquares);
+
+    // 3. Switch turn
+    setTurn(turn === "x" ? "o" : "x");
+  }
+
+  // Handle Game State Logic whenever squares change
+  useEffect(() => {
+    const nulled = isNulled(squares);
+    console.log(nulled);
+    if (!nulled) {
+      const state = getGameState(squares);
+      setGameState(state);
+      console.log(state);
+    }
+    // Note: Don't reset squares here automatically if you want
+    // the user to see the "Winner" screen!
+  }, [squares, setGameState]);
+
+  const handleRestart = () => {
+    setSquares(Array(9).fill(null));
+    setTurn("x");
+    setGameState({ status: "ongoing", winner: undefined }); // Reset status
+  };
   const baseUrl = import.meta.env.BASE_URL;
   return (
     <section className="game">
       <div className="head">
         <img src={`${baseUrl}/assets/logo.svg`} alt="logo" />
         <div className="turn">
-          <img src={`${baseUrl}/assets/icon-x.svg`} alt="turn" />
+          <img src={`${baseUrl}/assets/icon-${turn}.svg`} alt="turn" />
           <span>TURN</span>
         </div>
-        <div className="restart">
+        <button
+          type="button"
+          className="restart"
+          onClick={(_) => {
+            handleRestart();
+          }}
+        >
           <img src={`${baseUrl}/assets/icon-restart.svg`} alt="restart" />
-        </div>
+        </button>
       </div>
       <div className="board">
-        <div className="cell"></div>
-        <div className="cell"></div>
-        <div className="cell"></div>
-        <div className="cell"></div>
-        <div className="cell"></div>
-        <div className="cell"></div>
-        <div className="cell"></div>
-        <div className="cell"></div>
-        <div className="cell"></div>
+        {squares.map((square, index) => (
+          <div
+            className={`cell c-${index + 1}`}
+            key={index}
+            onClick={(_) => handleClick(index)}
+          >
+            <img
+              src={
+                square === "x"
+                  ? `${baseUrl}/assets/icon-x.svg`
+                  : square === "o"
+                    ? `${baseUrl}/assets/icon-o.svg`
+                    : undefined
+              }
+            />
+          </div>
+        ))}
       </div>
       <div className="foot"></div>
     </section>

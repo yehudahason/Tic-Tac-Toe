@@ -16,11 +16,16 @@ export default function Menu({
       <div className="mark">
         <h3>PICK PLAYER 1'S MARK</h3>
         <div className="mark-icons">
-          <button className={`x bg ${play.player === "x" && "active"} `} onClick={(_)=>setPlay({ ...play, player: "x" })}>
+          <button
+            className={`x bg ${play.player === "x" && "active"} `}
+            onClick={(_) => setPlay({ ...play, player: "x" })}
+          >
             <img src={`${baseUrl}/assets/icon-x.svg`} alt="X" />
           </button>
-          <button className={`o bg ${play.player === "o" && "active"}`}
-          onClick={(_)=>setPlay({ ...play, player: "o" })}>
+          <button
+            className={`o bg ${play.player === "o" && "active"}`}
+            onClick={(_) => setPlay({ ...play, player: "o" })}
+          >
             <img src={`${baseUrl}/assets/icon-o.svg`} alt="O" />
           </button>
         </div>
@@ -28,13 +33,19 @@ export default function Menu({
       </div>
       <button
         className="menu-btn cpu"
-        onClick={() => setGameState({ status: "ongoing" })}
+        onClick={() => {
+          setGameState({ status: "ongoing" });
+          setPlay({ player: "x", against: "cpu" });
+        }}
       >
         NEW GAME (VS CPU)
       </button>
       <button
         className="menu-btn player"
-        onClick={() => setGameState({ status: "ongoing" })}
+        onClick={() => {
+          setGameState({ status: "ongoing" });
+          setPlay({ player: "x", against: "player" });
+        }}
       >
         NEW GAME (VS PLAYER)
       </button>

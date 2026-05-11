@@ -225,8 +225,23 @@ h4 {
   display: flex;
   justify-content: center;
 }
+.cell {
+  display: grid;
+  place-items: center;
+}
+.cell img {
+  height: 63px;
+  width: auto;
+}
 .restart {
   justify-self: end;
+  padding: 0.5rem;
+  background-color: var(--color-slate-300);
+  border-radius: 0.8rem;
+  display: grid;
+  place-items: center;
+  border: none;
+  cursor: pointer;
 }
 @media (max-width: 500px) {
   .mark-icons,
@@ -239,13 +254,19 @@ h4 {
   }
   .board .cell {
     width: 100%;
-    height: 100%;
+    height: clamp(80px, 100px, 120px);
+  }
+  .cell img {
+    height: auto;
+    width: 40px;
   }
   .game {
     width: 100%;
+    padding: 1rem;
   }
   .turn {
-    padding: 0.5rem 1rem;
+    padding: 0.5rem;
+    gap: 0.5rem;
   }
   .turn img {
     height: 0.8rem;
