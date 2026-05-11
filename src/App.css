@@ -1,42 +1,183 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+:root {
+  /* Slate */
+  --color-slate-950: black;
+  --color-slate-0: white;
+  --color-slate-900: #1a2a33;
+  --color-slate-850: #21313b;
+  --color-slate-800: #1f3641;
+  --color-slate-300: #a8bfc9;
+  --color-slate-100: #dbe8ed;
+  --color-amber-400: #f2b137; /* rgb(242, 177, 55) | hsl(39, 88%, 58%) */
+  --color-amber-300: #ffc860; /* rgb(255, 200, 96) | hsl(39, 100%, 69%) */
+
+  /* Teal Palette */
+  --color-teal-400: #31c3bd; /* rgb(45, 195, 189) | hsl(178, 60%, 48%) */
+  --color-teal-300: #65e9e4; /* rgb(101, 233, 228) | hsl(178, 75%, 65%) */
+
+  --preset-1: 700 2.5rem/1.25 var(--font-family);
+  --ls-1: 0.15625rem;
+
+  /* Preset 2 (24px) */
+  --preset-2: 700 1.5rem/1.25 var(--font-family);
+  --ls-2: 0.09375rem;
+
+  /* Preset 3 (20px) */
+  --preset-3: 700 1.25rem/1.25 var(--font-family);
+  --ls-3: 0.078125rem;
+
+  /* Preset 4 (16px) */
+  --preset-4: 700 1rem/1.25 var(--font-family);
+  --ls-4: 0.0625rem;
+
+  /* Preset 5 (14px) */
+  --preset-5-bold: 700 0.875rem/1.3 var(--font-family);
+  --preset-5-medium: 500 0.875rem/1.3 var(--font-family);
+  --ls-5: 0.05625rem;
+
+  /* Preset 6 (12px) */
+  --preset-6-medium: 500 0.75rem/1.25 var(--font-family);
+  --ls-6: 0.046875rem;
+}
+
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+  max-width: 1440px;
+  margin: 0;
+  padding: 0rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  width: 100%;
+}
+
+body {
+  font-family: "Outfit", sans-serif;
+  background-color: var(--color-slate-900);
+  color: var(--color-slate-0);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  justify-content: center;
+  align-items: center;
+}
+
+h3 {
+  font: var(--preset-4);
+  letter-spacing: var(--ls-4);
+  color: var(--color-slate-300);
+  text-align: center;
+  padding: 0.5rem;
+}
+
+h4 {
+  font: var(--preset-5-medium);
+  letter-spacing: var(--ls-5);
+  padding: 0.5rem;
+  color: var(--color-slate-300);
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+.mark {
+  background-color: var(--color-slate-850);
+  padding: 1rem;
+  border-radius: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  flex-direction: column;
+  box-shadow: 10px 10px 16px rgba(0, 0, 0, 0.1);
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.mark-icons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.2rem;
+  padding: 0.5rem;
+  background-color: var(--color-slate-900);
+  width: 421px;
+  border-radius: 1rem;
 }
 
-.card {
-  padding: 2em;
+.mark-icons .bg {
+  width: 100%;
+  padding: 0.7rem;
+  border-radius: 0.8rem;
+}
+.o img {
+  filter: brightness(0) invert(93%) sepia(5%) saturate(882%) hue-rotate(167deg)
+    brightness(101%) contrast(88%);
+}
+.x img {
+  filter: brightness(0) invert(93%) sepia(5%) saturate(882%) hue-rotate(167deg)
+    brightness(101%) contrast(88%);
+}
+.x.active img {
+  filter: brightness(0) invert(12%) sepia(13%) saturate(3020%)
+    hue-rotate(162deg) brightness(93%) contrast(92%);
 }
 
-.read-the-docs {
-  color: #888;
+.o.active img {
+  filter: brightness(0) invert(12%) sepia(13%) saturate(3020%)
+    hue-rotate(162deg) brightness(93%) contrast(92%);
+}
+.bg.active {
+  background-color: var(--color-slate-300);
+}
+
+.mark-icons img {
+  height: 2rem;
+  width: 2rem;
+}
+
+.menu-btn {
+  width: 100%;
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  font: var(--preset-3);
+  letter-spacing: var(--ls-3);
+  font-weight: bold;
+  box-shadow: 10px 10px 16px rgba(0, 0, 0, 0.1);
+}
+
+.menu-btn.cpu {
+  background-color: var(--color-amber-400);
+}
+.menu-btn.player{
+  margin-top: -1rem;
+  background-color: var(--color-teal-400);
+
+}
+
+@media (max-width: 500px){
+.mark-icons,
+.mark{
+  width: 100%;
+}
+.menu{
+  width: 100%;
+padding: 1rem;
+}
+
 }
