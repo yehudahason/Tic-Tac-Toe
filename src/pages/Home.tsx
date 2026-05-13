@@ -26,25 +26,28 @@ const Home = () => {
   });
   return (
     <>
-      <Menu
-        play={play}
-        setPlay={setPlay}
-        setGameState={setGameState}
-        setPX={setPX}
-        setPO={setPO}
-      />
-      <Game
-        gameState={gameState}
-        setGameState={setGameState}
-        squares={squares}
-        setSquares={setSquares}
-        play={play}
-        setPlay={setPlay}
-        pX={pX}
-        pO={pO}
-        results={results}
-        setResults={setResults}
-      />
+      {gameState.status === "notStarted" ? (
+        <Menu
+          play={play}
+          setPlay={setPlay}
+          setGameState={setGameState}
+          setPX={setPX}
+          setPO={setPO}
+        />
+      ) : (
+        <Game
+          gameState={gameState}
+          setGameState={setGameState}
+          squares={squares}
+          setSquares={setSquares}
+          play={play}
+          setPlay={setPlay}
+          pX={pX}
+          pO={pO}
+          results={results}
+          setResults={setResults}
+        />
+      )}
       <Footer />
     </>
   );

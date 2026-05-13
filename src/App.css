@@ -230,6 +230,7 @@ h4 {
 .cell {
   display: grid;
   place-items: center;
+  cursor: pointer;
 }
 .cell img {
   height: 63px;
@@ -268,6 +269,15 @@ h4 {
   font: var(--preset-5-bold);
   letter-spacing: var(--ls-5);
   text-align: center;
+}
+.icon-hover {
+  display: none;
+}
+.cell:hover .icon-hover {
+  display: inline-block;
+}
+.cell:hover .icon-hover.null {
+  display: none;
 }
 
 .results .player .total {

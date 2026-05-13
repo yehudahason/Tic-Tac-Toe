@@ -116,6 +116,15 @@ export default function Game({
                     : undefined
               }
             />
+            {square === "X" || square === "O" ? (
+              ""
+            ) : (
+              <img
+                className={`icon-hover`}
+                src={`${baseUrl}/assets/icon-${turn}-outline.svg`}
+                alt=""
+              />
+            )}
           </div>
         ))}
       </div>
