@@ -56,16 +56,14 @@ export default function Game({
         switch (play.difficulty) {
           case "EASY":
             move = getRandomMove([...squares]);
-            console.log("easy move");
 
             break;
           case "MEDIUM":
             move = getDefensiveMove([...squares], cpuPiece, humanPiece);
-            console.log("medium move");
+
             break;
           case "HARD":
             move = getAdvanceMove([...squares], cpuPiece, humanPiece);
-            console.log("hard move");
 
             break;
           default:
@@ -127,7 +125,7 @@ export default function Game({
     if (!nulled) {
       const state = getGameState(squares);
       setGameState(state);
-      console.log(state);
+
       if (state.status === "ongoing") {
         setTurn(turn === "x" ? "o" : "x");
       }
