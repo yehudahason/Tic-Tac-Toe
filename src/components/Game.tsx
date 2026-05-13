@@ -11,6 +11,7 @@ import getGameState from "../utils/getGameState";
 import getDefensiveMove from "../utils/getDefensiveMove";
 import getIntermediateMove from "../utils/getIntermidateMove";
 import getAdvanceMove from "../utils/minimax";
+import getRandomMove from "../utils/getRandomMove";
 
 export default function Game({
   gameState,
@@ -51,7 +52,7 @@ export default function Game({
         let move = null;
         switch (play.difficulty) {
           case "EASY":
-            move = getIntermediateMove([...squares], cpuPiece, humanPiece);
+            move = getRandomMove([...squares]);
             console.log("easy move");
 
             break;
