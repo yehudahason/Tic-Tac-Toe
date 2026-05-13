@@ -18,8 +18,10 @@
   --color-slate-850: #21313b;
   --color-slate-800: #1f3641;
   --color-slate-300: #a8bfc9;
+  --color-slate-301: #7e96a0;
   --color-slate-100: #dbe8ed;
   --color-amber-400: #f2b137; /* rgb(242, 177, 55) | hsl(39, 88%, 58%) */
+  --color-amber-401: #bc8b2e; /* rgb(242, 177, 55) | hsl(39, 88%, 58%) */
   --color-amber-300: #ffc860; /* rgb(255, 200, 96) | hsl(39, 100%, 69%) */
 
   /* Teal Palette */
@@ -117,7 +119,7 @@ h4 {
   align-items: center;
   gap: 1rem;
   flex-direction: column;
-  box-shadow: 10px 10px 16px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 6px 4px rgb(0, 0, 0);
 }
 .mark-icons {
   display: flex;
@@ -174,16 +176,18 @@ h4 {
   font: var(--preset-3);
   letter-spacing: var(--ls-3);
   font-weight: bold;
-  box-shadow: 10px 10px 16px rgba(0, 0, 0, 0.1);
   cursor: pointer;
+  border: none;
 }
 
 .menu-btn.cpu {
   background-color: var(--color-amber-400);
+  box-shadow: 0px 6px 0px #bc8b2e;
 }
 .menu-btn.player {
   margin-top: -1rem;
-  background-color: var(--color-teal-400);
+  background-color: var(--color-teal-300);
+  box-shadow: 0px 6px 0px #55c6c2;
 }
 .game {
   width: 461px;
@@ -329,12 +333,16 @@ h4 {
   background-color: var(--color-slate-300);
   border: none;
   color: var(--color-slate-950);
+  box-shadow: 0px 1px 10px #7e96a0;
 }
 .diff-options button:hover {
   background-color: var(--color-amber-300);
 }
 .diff-options button.active {
   background-color: var(--color-amber-300);
+}
+.diff-options button:active {
+  transform: scale(0.98);
 }
 
 .end-game-banner {
@@ -388,9 +396,11 @@ h4 {
   font: var(--preset-4);
   letter-spacing: var(--ls-4);
   font-weight: 600;
+  box-shadow: 0px 4px 0px #7e96a0;
 }
 .end-btn button:nth-child(2) {
   background-color: var(--color-amber-400);
+  box-shadow: 0px 4px 0px #bc8b2e;
 }
 .restart-msg {
   font: var(--preset-1);
