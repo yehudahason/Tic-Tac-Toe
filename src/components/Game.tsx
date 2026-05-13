@@ -22,6 +22,8 @@ export default function Game({
   results,
   setResults,
   play,
+  turn,
+  setTurn,
 }: {
   gameState: gameStateType;
   setGameState: React.Dispatch<React.SetStateAction<gameStateType>>;
@@ -33,9 +35,11 @@ export default function Game({
   pO: players;
   results: results;
   setResults: React.Dispatch<React.SetStateAction<results>>;
+  turn: string;
+  setTurn: React.Dispatch<React.SetStateAction<string>>;
 }) {
   const baseUrl = import.meta.env.BASE_URL;
-  const [turn, setTurn] = useState<string>("x");
+
   useEffect(() => {
     // Determine if it's currently the CPU's turn
     const isCpuTurn =
@@ -91,9 +95,10 @@ export default function Game({
   }
 
   const handleRestart = () => {
+    window.location.reload();
+    setGameState({ status: "notStarted", winner: "draw" });
     setSquares(Array(9).fill(null));
     setTurn("x");
-    setGameState({ status: "ongoing", winner: "draw" }); // Reset status
   };
 
   function calculateResults(state: gameStateType) {

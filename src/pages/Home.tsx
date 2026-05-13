@@ -9,6 +9,7 @@ import {
   type players,
   type results,
 } from "../types/types";
+import EndGameBanner from "../components/EndGameBanner";
 
 const Home = () => {
   const [gameState, setGameState] = useState<gameStateType>({
@@ -28,6 +29,7 @@ const Home = () => {
     O: 0,
     draw: 0,
   });
+  const [turn, setTurn] = useState<string>("x");
   return (
     <>
       {gameState.status === "notStarted" ? (
@@ -50,6 +52,17 @@ const Home = () => {
           pO={pO}
           results={results}
           setResults={setResults}
+          turn={turn}
+          setTurn={setTurn}
+        />
+      )}
+      {(gameState.status === "draw" || gameState.status === "winner") && (
+        <EndGameBanner
+          gameState={gameState}
+          setGameState={setGameState}
+          play={play}
+          setTurn={setTurn}
+          setSquares={setSquares}
         />
       )}
 
