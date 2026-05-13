@@ -354,7 +354,7 @@ h4 {
   text-align: center;
 }
 .end-game-banner img {
-  height: 3.5rem;
+  height: 3rem;
   width: auto;
 }
 .takes {
@@ -382,12 +382,17 @@ h4 {
 .end-btn button {
   border-radius: 10px;
   cursor: pointer;
-  padding: 0.7rem 1rem;
+  padding: 0.8rem 1.2rem;
   background-color: var(--color-slate-300);
   border: none;
 }
 .end-btn button:nth-child(2) {
   background-color: var(--color-amber-400);
+}
+.restart-msg {
+  font: var(--preset-1);
+  letter-spacing: var(--ls-1);
+  color: var(--color-slate-300);
 }
 @media (max-width: 500px) {
   .mark-icons,
@@ -429,5 +434,14 @@ h4 {
     font: var(--preset-4);
     letter-spacing: var(--ls-4);
     padding: 0.5rem;
+  }
+  .takes {
+    font: var(--preset-2);
+    letter-spacing: var(--ls-2);
+    gap: 0.5rem;
+  }
+  .takes img {
+    height: 2rem;
+    width: auto;
   }
 }

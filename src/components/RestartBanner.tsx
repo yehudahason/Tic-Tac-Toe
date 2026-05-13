@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import {
   type gameStateType,
   type playType,
@@ -6,9 +6,7 @@ import {
 } from "../types/types";
 
 export default function RestartBanner({
-  gameState,
   setGameState,
-  play,
   setTurn,
   setSquares,
 }: {
@@ -38,7 +36,7 @@ export default function RestartBanner({
   }, []);
   return (
     <section className="end-game-banner">
-      <p className="winner">RESTART GAME?</p>
+      <p className="restart-msg">RESTART GAME?</p>
 
       <div className="end-btn">
         <button type="button" onClick={(_) => nextRound()}>
