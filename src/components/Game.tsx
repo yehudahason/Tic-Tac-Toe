@@ -9,7 +9,6 @@ import {
 import isNulled from "../utils/isNulled";
 import getGameState from "../utils/getGameState";
 import getDefensiveMove from "../utils/getDefensiveMove";
-import getIntermediateMove from "../utils/getIntermidateMove";
 import getAdvanceMove from "../utils/minimax";
 import getRandomMove from "../utils/getRandomMove";
 
