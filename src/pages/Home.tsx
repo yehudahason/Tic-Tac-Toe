@@ -2,21 +2,28 @@ import Menu from "../components/Menu";
 import Game from "../components/Game";
 import Footer from "../components/Footer";
 import { useState } from "react";
-import type {
-  gameStateType,
-  playType,
-  squaresType,
-  players,
+import {
+  type gameStateType,
+  type playType,
+  type squaresType,
+  type players,
+  type results,
 } from "../types/types";
 
 const Home = () => {
   const [gameState, setGameState] = useState<gameStateType>({
     status: "notStarted",
+    winner: "draw",
   });
   const [play, setPlay] = useState<playType>({ player: "X", against: "CPU" });
   const [squares, setSquares] = useState<squaresType>(Array(9).fill(null));
   const [pX, setPX] = useState<players>("YOU");
-  const [pY, setPY] = useState<players>("CPU");
+  const [pO, setPO] = useState<players>("CPU");
+  const [results, setResults] = useState<results>({
+    X: 0,
+    O: 0,
+    draw: 0,
+  });
   return (
     <>
       <Menu
@@ -24,7 +31,7 @@ const Home = () => {
         setPlay={setPlay}
         setGameState={setGameState}
         setPX={setPX}
-        setPY={setPY}
+        setPO={setPO}
       />
       <Game
         gameState={gameState}
@@ -34,7 +41,9 @@ const Home = () => {
         play={play}
         setPlay={setPlay}
         pX={pX}
-        pY={pY}
+        pO={pO}
+        results={results}
+        setResults={setResults}
       />
       <Footer />
     </>

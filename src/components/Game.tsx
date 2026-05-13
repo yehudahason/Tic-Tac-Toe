@@ -4,6 +4,7 @@ import {
   type squaresType,
   type playType,
   type players,
+  type results,
 } from "../types/types";
 import isNulled from "../utils/isNulled";
 import getGameState from "../utils/getGameState";
@@ -16,7 +17,9 @@ export default function Game({
   play,
   setPlay,
   pX,
-  pY,
+  pO,
+  results,
+  setResults,
 }: {
   gameState: gameStateType;
   setGameState: React.Dispatch<React.SetStateAction<gameStateType>>;
@@ -25,7 +28,9 @@ export default function Game({
   play: playType;
   setPlay: React.Dispatch<React.SetStateAction<playType>>;
   pX: players;
-  pY: players;
+  pO: players;
+  results: results;
+  setResults: React.Dispatch<React.SetStateAction<results>>;
 }) {
   const baseUrl = import.meta.env.BASE_URL;
   const [turn, setTurn] = useState<string>("x");
@@ -35,15 +40,35 @@ export default function Game({
 
     // 2. Update the board
     const newSquares = [...squares];
-    newSquares[index] = turn;
+    newSquares[index] = turn.toUpperCase() as "X" | "O";
     setSquares(newSquares);
   }
 
   const handleRestart = () => {
     setSquares(Array(9).fill(null));
     setTurn("x");
-    setGameState({ status: "ongoing", winner: undefined }); // Reset status
+    setGameState({ status: "ongoing", winner: "draw" }); // Reset status
   };
+
+  function calculateResults(state: gameStateType) {
+    switch (state.winner) {
+      case "X":
+        setResults((prev) => ({ ...prev, X: prev.X + 1 }));
+        break;
+      case "O":
+        setResults((prev) => ({ ...prev, O: prev.O + 1 }));
+        break;
+      case "draw":
+        if (state.status === "draw") {
+          setResults((prev) => ({ ...prev, draw: prev.draw + 1 }));
+          break;
+        }
+        break;
+
+      default:
+        break;
+    }
+  }
   // Handle Game State Logic whenever squares change
   useEffect(() => {
     const nulled = isNulled(squares);
@@ -54,6 +79,7 @@ export default function Game({
       if (state.status === "ongoing") {
         setTurn(turn === "x" ? "o" : "x");
       }
+      calculateResults(state);
     }
   }, [squares, setGameState]);
   return (
@@ -83,9 +109,9 @@ export default function Game({
           >
             <img
               src={
-                square === "x"
+                square === "X"
                   ? `${baseUrl}/assets/icon-x.svg`
-                  : square === "o"
+                  : square === "O"
                     ? `${baseUrl}/assets/icon-o.svg`
                     : undefined
               }
@@ -96,16 +122,15 @@ export default function Game({
       <div className="results">
         <div className="player">
           <span>{`X(${pX})`}</span>
-          <span>0</span>
-        </div>
-        <div className="ties">
-          <span>TIES</span>
-          <span>0</span>
+          <span className="total">{results.X}</span>
         </div>
         <div className="player">
-          {" "}
-          <span>{`Y(${pY})`}</span>
-          <span>0</span>
+          <span>TIES</span>
+          <span className="total">{results.draw}</span>
+        </div>
+        <div className="player">
+          <span>{`O(${pO})`}</span>
+          <span className="total">{results.O}</span>
         </div>
       </div>
 

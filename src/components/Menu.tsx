@@ -6,13 +6,13 @@ export default function Menu({
   setPlay,
   setGameState,
   setPX,
-  setPY,
+  setPO,
 }: {
   play: playType;
   setPlay: React.Dispatch<React.SetStateAction<playType>>;
   setGameState: React.Dispatch<React.SetStateAction<gameStateType>>;
   setPX: React.Dispatch<React.SetStateAction<players>>;
-  setPY: React.Dispatch<React.SetStateAction<players>>;
+  setPO: React.Dispatch<React.SetStateAction<players>>;
 }) {
   const baseUrl = import.meta.env.BASE_URL;
 
@@ -20,22 +20,22 @@ export default function Menu({
     switch (players) {
       case "X-CPU":
         setPX("YOU");
-        setPY("CPU");
+        setPO("CPU");
         break;
 
       case "O-CPU":
         setPX("CPU");
-        setPY("YOU");
+        setPO("YOU");
         break;
 
       case "X-P2":
         setPX("P1");
-        setPY("P2");
+        setPO("P2");
         break;
 
       case "O-P2":
         setPX("P2");
-        setPY("P1");
+        setPO("P1");
         break;
 
       default:
@@ -44,7 +44,7 @@ export default function Menu({
   }
   useEffect(() => {
     setPlayers(`${play.player}-${play.against}`);
-  }, [play, setPX, setPY]);
+  }, [play, setPX, setPO]);
 
   return (
     <section className="menu">
@@ -70,7 +70,7 @@ export default function Menu({
       <button
         className="menu-btn cpu"
         onClick={() => {
-          setGameState({ status: "ongoing" });
+          setGameState({ status: "ongoing", winner: "draw" });
           setPlay({ ...play, against: "CPU" });
         }}
       >
@@ -79,7 +79,7 @@ export default function Menu({
       <button
         className="menu-btn player"
         onClick={() => {
-          setGameState({ status: "ongoing" });
+          setGameState({ status: "ongoing", winner: "draw" });
           setPlay({ ...play, against: "P2" });
         }}
       >

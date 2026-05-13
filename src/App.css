@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap");
 * {
   box-sizing: border-box;
   margin: 0;
@@ -10,6 +11,7 @@
 }
 :root {
   /* Slate */
+  --font-family: "Outfit";
   --color-slate-950: black;
   --color-slate-0: white;
   --color-slate-900: #1a2a33;
@@ -243,6 +245,48 @@ h4 {
   border: none;
   cursor: pointer;
 }
+
+.results {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  justify-content: space-between;
+  width: 100%;
+}
+.results .player {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  flex-direction: column;
+  width: 133px;
+  min-height: auto;
+  padding: 0.5rem 1rem;
+  background-color: var(--color-slate-800);
+  border-radius: 10px;
+  color: var(--color-slate-950);
+  font: var(--preset-5-bold);
+  letter-spacing: var(--ls-5);
+  text-align: center;
+}
+
+.results .player .total {
+  font: var(--preset-2);
+  letter-spacing: var(--ls-2);
+  text-align: center;
+}
+.player:nth-child(1) {
+  background-color: var(--color-teal-400);
+}
+
+.player:nth-child(2) {
+  background-color: var(--color-slate-300);
+}
+
+.player:nth-child(3) {
+  background-color: var(--color-amber-400);
+}
+
 @media (max-width: 500px) {
   .mark-icons,
   .mark {
@@ -252,7 +296,8 @@ h4 {
     width: 100%;
     padding: 1rem;
   }
-  .board .cell {
+  .board .cell,
+  .results .player {
     width: 100%;
     height: clamp(80px, 100px, 120px);
   }
@@ -273,6 +318,9 @@ h4 {
     width: 0.8rem;
   }
   .board {
+    gap: 1rem;
+  }
+  .results {
     gap: 1rem;
   }
 }
