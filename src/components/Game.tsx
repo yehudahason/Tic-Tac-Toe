@@ -95,10 +95,7 @@ export default function Game({
   }
 
   const handleRestart = () => {
-    window.location.reload();
-    setGameState({ status: "notStarted", winner: "draw" });
-    setSquares(Array(9).fill(null));
-    setTurn("x");
+    setGameState({ status: "stopped", winner: "draw" });
   };
 
   function calculateResults(state: gameStateType) {

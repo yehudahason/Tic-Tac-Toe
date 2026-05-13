@@ -10,6 +10,7 @@ import {
   type results,
 } from "../types/types";
 import EndGameBanner from "../components/EndGameBanner";
+import RestartBanner from "../components/RestartBanner";
 
 const Home = () => {
   const [gameState, setGameState] = useState<gameStateType>({
@@ -65,7 +66,15 @@ const Home = () => {
           setSquares={setSquares}
         />
       )}
-
+      {gameState.status === "stopped" && (
+        <RestartBanner
+          gameState={gameState}
+          setGameState={setGameState}
+          play={play}
+          setTurn={setTurn}
+          setSquares={setSquares}
+        />
+      )}
       <Footer />
     </>
   );
