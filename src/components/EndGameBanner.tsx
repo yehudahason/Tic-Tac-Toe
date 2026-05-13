@@ -41,7 +41,7 @@ export default function EndGameBanner({
           break;
         case "O":
           if (play.player === "O") {
-            setWinner("YOU WON");
+            setWinner("YOU WON!");
           } else {
             setWinner("OH NO YOU LOST...");
           }
@@ -57,9 +57,11 @@ export default function EndGameBanner({
       switch (gameState.winner) {
         case "X":
           if (play.player === "X") setWinner("PLAYER 1 WINS!");
+          else setWinner("PLAYER 2 WINS!");
           break;
         case "O":
-          if (play.player === "X") setWinner("PLAYER 2 WINS!");
+          if (play.player === "O") setWinner("PLAYER 1 WINS!");
+          else setWinner("PLAYER 2 WINS!");
           break;
         case "draw":
           setWinner("ROUND TIED");
