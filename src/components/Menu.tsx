@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import type { gameStateType, playType, players } from "../types/types";
 
 export default function Menu({

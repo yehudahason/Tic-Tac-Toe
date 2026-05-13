@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   type gameStateType,
   type squaresType,
@@ -8,6 +8,8 @@ import {
 } from "../types/types";
 import isNulled from "../utils/isNulled";
 import getGameState from "../utils/getGameState";
+import getIntermediateMove from "../utils/getIntermidateMove";
+import minimax from "../utils/minimax";
 
 export default function Game({
   gameState,
@@ -18,6 +20,8 @@ export default function Game({
   pO,
   results,
   setResults,
+  play,
+  setPlay,
 }: {
   gameState: gameStateType;
   setGameState: React.Dispatch<React.SetStateAction<gameStateType>>;
@@ -32,11 +36,38 @@ export default function Game({
 }) {
   const baseUrl = import.meta.env.BASE_URL;
   const [turn, setTurn] = useState<string>("x");
+  useEffect(() => {
+    // Determine if it's currently the CPU's turn
+    const isCpuTurn =
+      play.against === "CPU" && turn === (play.player === "X" ? "o" : "x");
+
+    if (isCpuTurn && gameState.status === "ongoing") {
+      const timer = setTimeout(() => {
+        // 1. Identify pieces
+        const cpuPiece = turn; // 'x' or 'o'
+        const humanPiece = turn === "x" ? "o" : "x";
+
+        // 2. Call the advanced algorithm
+        const move = getIntermediateMove([...squares], cpuPiece, humanPiece);
+
+        // 3. Apply the move if one was found
+        if (move !== null) {
+          const newSquares = [...squares];
+          newSquares[move] = cpuPiece.toUpperCase() as "X" | "O";
+          setSquares(newSquares);
+        }
+      }, 600); // Shorter delay for "fast" AI feel
+
+      return () => clearTimeout(timer);
+    }
+  }, [turn, gameState.status, play, squares, setSquares]);
   function handleClick(index: number) {
     // 1. Guard clause: Stop if square is filled or game is over
     if (squares[index] || gameState.status !== "ongoing") return;
-
+    // No allow when cpu turn
+    if (play.against === "CPU" && turn !== play.player.toLowerCase()) return;
     // 2. Update the board
+
     const newSquares = [...squares];
     newSquares[index] = turn.toUpperCase() as "X" | "O";
     setSquares(newSquares);

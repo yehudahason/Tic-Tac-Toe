@@ -1,56 +1,96 @@
-import calculateWinner from "./calculateWinner";
-import type { moveType, squaresType } from "../types/types";
+import type { squaresType } from "../types/types";
 
-function minimax(
-  board: squaresType,
-  player: "X" | "O",
-  cpuPlayer: "X" | "O",
-  humanPlayer: "X" | "O",
-): moveType {
-  const winner = calculateWinner(board);
-  if (winner === cpuPlayer) return { score: 10 };
-  if (winner === humanPlayer) return { score: -10 };
-  if (!board.includes(null)) return { score: 0 };
+/**
+ * Minimax Algorithm for Tic-Tac-Toe
+ * It recursively evaluates all possible moves to find the optimal strategy.
+ */
+function getAdvancedMove(
+  squares: squaresType,
+  cpuPiece: string,
+  humanPiece: string,
+): number | null {
+  const cpu = cpuPiece.toUpperCase() as "X" | "O";
+  const human = humanPiece.toUpperCase() as "X" | "O";
 
-  const moves: moveType[] = [];
+  // 1. Helper: Check for winner in a specific board state
+  const checkWinner = (board: squaresType) => {
+    const lines = [
+      [0, 1, 2],
+      [3, 4, 5],
+      [6, 7, 8],
+      [0, 3, 6],
+      [1, 4, 7],
+      [2, 5, 8],
+      [0, 4, 8],
+      [2, 4, 6],
+    ];
+    for (const [a, b, c] of lines) {
+      if (board[a] && board[a] === board[b] && board[a] === board[c])
+        return board[a];
+    }
+    if (!board.includes(null)) return "draw";
+    return null;
+  };
 
-  for (let i = 0; i < board.length; i++) {
-    if (board[i] === null) {
-      board[i] = player; // Simulate move
+  // 2. The recursive Minimax function
+  function minimax(
+    board: squaresType,
+    depth: number,
+    isMaximizing: boolean,
+  ): number {
+    const result = checkWinner(board);
 
-      // Determine score recursively
-      const result = minimax(
-        board,
-        player === cpuPlayer ? humanPlayer : cpuPlayer,
-        cpuPlayer,
-        humanPlayer,
-      );
+    // Base cases: return score based on outcome
+    if (result === cpu) return 10 - depth; // Winning sooner is better
+    if (result === human) return depth - 10; // Losing later is better
+    if (result === "draw") return 0;
 
-      moves.push({ index: i, score: result.score });
-      board[i] = null; // Backtrack
+    if (isMaximizing) {
+      let bestScore = -Infinity;
+      for (let i = 0; i < 9; i++) {
+        if (board[i] === null) {
+          board[i] = cpu;
+          const score = minimax(board, depth + 1, false);
+          board[i] = null; // Undo move
+          bestScore = Math.max(score, bestScore);
+        }
+      }
+      return bestScore;
+    } else {
+      let bestScore = Infinity;
+      for (let i = 0; i < 9; i++) {
+        if (board[i] === null) {
+          board[i] = human;
+          const score = minimax(board, depth + 1, true);
+          board[i] = null; // Undo move
+          bestScore = Math.min(score, bestScore);
+        }
+      }
+      return bestScore;
     }
   }
 
-  let bestMoveIndex = 0;
-  if (player === cpuPlayer) {
-    let bestScore = -Infinity;
-    for (let i = 0; i < moves.length; i++) {
-      if (moves[i].score > bestScore) {
-        bestScore = moves[i].score;
-        bestMoveIndex = i;
-      }
-    }
-  } else {
-    let bestScore = Infinity;
-    for (let i = 0; i < moves.length; i++) {
-      if (moves[i].score < bestScore) {
-        bestScore = moves[i].score;
-        bestMoveIndex = i;
+  // 3. Find the best starting move for the current board
+  let bestScore = -Infinity;
+  let move = null;
+
+  // Optimization: If board is empty, take a corner or center immediately
+  if (squares.every((s) => s === null)) return 4;
+
+  for (let i = 0; i < 9; i++) {
+    if (squares[i] === null) {
+      const boardCopy = [...squares] as squaresType;
+      boardCopy[i] = cpu;
+      const score = minimax(boardCopy, 0, false);
+
+      if (score > bestScore) {
+        bestScore = score;
+        move = i;
       }
     }
   }
 
-  return moves[bestMoveIndex];
+  return move;
 }
 
-export default minimax;
+export default getAdvancedMove;
