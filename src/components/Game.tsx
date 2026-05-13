@@ -15,8 +15,8 @@ export default function Game({
   setSquares,
   play,
   setPlay,
-  p1,
-  p2,
+  pX,
+  pY,
 }: {
   gameState: gameStateType;
   setGameState: React.Dispatch<React.SetStateAction<gameStateType>>;
@@ -24,8 +24,8 @@ export default function Game({
   setSquares: React.Dispatch<React.SetStateAction<squaresType>>;
   play: playType;
   setPlay: React.Dispatch<React.SetStateAction<playType>>;
-  p1: players;
-  p2: players;
+  pX: players;
+  pY: players;
 }) {
   const baseUrl = import.meta.env.BASE_URL;
   const [turn, setTurn] = useState<string>("x");
@@ -95,7 +95,7 @@ export default function Game({
       </div>
       <div className="results">
         <div className="player">
-          <span>{`X(${p1})`}</span>
+          <span>{`X(${pX})`}</span>
           <span>0</span>
         </div>
         <div className="ties">
@@ -104,7 +104,7 @@ export default function Game({
         </div>
         <div className="player">
           {" "}
-          <span>{`Y(${p2})`}</span>
+          <span>{`Y(${pY})`}</span>
           <span>0</span>
         </div>
       </div>

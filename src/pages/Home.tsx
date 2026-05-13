@@ -15,16 +15,16 @@ const Home = () => {
   });
   const [play, setPlay] = useState<playType>({ player: "X", against: "CPU" });
   const [squares, setSquares] = useState<squaresType>(Array(9).fill(null));
-  const [p1, setP1] = useState<players>("YOU");
-  const [p2, setP2] = useState<players>("CPU");
+  const [pX, setPX] = useState<players>("YOU");
+  const [pY, setPY] = useState<players>("CPU");
   return (
     <>
       <Menu
         play={play}
         setPlay={setPlay}
         setGameState={setGameState}
-        setP1={setP1}
-        setP2={setP2}
+        setPX={setPX}
+        setPY={setPY}
       />
       <Game
         gameState={gameState}
@@ -33,8 +33,8 @@ const Home = () => {
         setSquares={setSquares}
         play={play}
         setPlay={setPlay}
-        p1={p1}
-        p2={p2}
+        pX={pX}
+        pY={pY}
       />
       <Footer />
     </>

@@ -5,37 +5,37 @@ export default function Menu({
   play,
   setPlay,
   setGameState,
-  setP1,
-  setP2,
+  setPX,
+  setPY,
 }: {
   play: playType;
   setPlay: React.Dispatch<React.SetStateAction<playType>>;
   setGameState: React.Dispatch<React.SetStateAction<gameStateType>>;
-  setP1: React.Dispatch<React.SetStateAction<players>>;
-  setP2: React.Dispatch<React.SetStateAction<players>>;
+  setPX: React.Dispatch<React.SetStateAction<players>>;
+  setPY: React.Dispatch<React.SetStateAction<players>>;
 }) {
   const baseUrl = import.meta.env.BASE_URL;
 
   function setPlayers(players: string) {
     switch (players) {
       case "X-CPU":
-        setP1("YOU");
-        setP2("CPU");
+        setPX("YOU");
+        setPY("CPU");
         break;
 
       case "O-CPU":
-        setP1("CPU");
-        setP2("YOU");
+        setPX("CPU");
+        setPY("YOU");
         break;
 
       case "X-P2":
-        setP1("P1");
-        setP2("P2");
+        setPX("P1");
+        setPY("P2");
         break;
 
       case "O-P2":
-        setP1("P2");
-        setP2("P1");
+        setPX("P2");
+        setPY("P1");
         break;
 
       default:
@@ -44,7 +44,7 @@ export default function Menu({
   }
   useEffect(() => {
     setPlayers(`${play.player}-${play.against}`);
-  }, [play, setP1, setP2]);
+  }, [play, setPX, setPY]);
 
   return (
     <section className="menu">
