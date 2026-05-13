@@ -28,47 +28,24 @@ export default function EndGameBanner({
   };
 
   useEffect(() => {
-    console.log(play);
-    console.log(gameState);
-    if (play.against === "CPU") {
-      switch (gameState.winner) {
-        case "X":
-          if (play.player === "X") {
-            setWinner("YOU WON!");
-          } else {
-            setWinner("OH NO YOU LOST...");
-          }
-          break;
-        case "O":
-          if (play.player === "O") {
-            setWinner("YOU WON!");
-          } else {
-            setWinner("OH NO YOU LOST...");
-          }
-          break;
-        case "draw":
-          setWinner("ROUND TIED");
-          break;
-        default:
-          break;
-      }
+    const { winner } = gameState;
+    const { against, player } = play;
+
+    // 1. Handle Draw immediately
+    if (winner === "draw") {
+      setWinner("ROUND TIED");
+      return;
     }
-    if (play.against === "P2") {
-      switch (gameState.winner) {
-        case "X":
-          if (play.player === "X") setWinner("PLAYER 1 WINS!");
-          else setWinner("PLAYER 2 WINS!");
-          break;
-        case "O":
-          if (play.player === "O") setWinner("PLAYER 1 WINS!");
-          else setWinner("PLAYER 2 WINS!");
-          break;
-        case "draw":
-          setWinner("ROUND TIED");
-          break;
-        default:
-          break;
-      }
+
+    // 2. Stop if there's no winner yet
+    if (!winner) return;
+
+    const isPlayer1Winner = winner === player;
+
+    if (against === "CPU") {
+      setWinner(isPlayer1Winner ? "YOU WON!" : "OH NO YOU LOST...");
+    } else {
+      setWinner(isPlayer1Winner ? "PLAYER 1 WINS!" : "PLAYER 2 WINS!");
     }
   }, [play, gameState]);
 
