@@ -25,7 +25,7 @@ const Home = () => {
   const [squares, setSquares] = useState<squaresType>(Array(9).fill(null));
   const [pX, setPX] = useState<players>("YOU");
   const [pO, setPO] = useState<players>("CPU");
-  const [results, setResults] = useState(() => {
+  const [results, setResults] = useState<results>(() => {
     const saved = localStorage.getItem("tic-tac-toe-results");
     return saved ? JSON.parse(saved) : { X: 0, O: 0, draw: 0 };
   });
