@@ -10,6 +10,7 @@ import isNulled from "../utils/isNulled";
 import getGameState from "../utils/getGameState";
 import getIntermediateMove from "../utils/getIntermidateMove";
 import minimax from "../utils/minimax";
+import getDefensiveMove from "../utils/getDefensiveMove";
 
 export default function Game({
   gameState,
@@ -21,7 +22,6 @@ export default function Game({
   results,
   setResults,
   play,
-  setPlay,
 }: {
   gameState: gameStateType;
   setGameState: React.Dispatch<React.SetStateAction<gameStateType>>;
@@ -48,7 +48,7 @@ export default function Game({
         const humanPiece = turn === "x" ? "o" : "x";
 
         // 2. Call the advanced algorithm
-        const move = getIntermediateMove([...squares], cpuPiece, humanPiece);
+        const move = getDefensiveMove([...squares], cpuPiece, humanPiece);
 
         // 3. Apply the move if one was found
         if (move !== null) {
