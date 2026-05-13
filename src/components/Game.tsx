@@ -1,5 +1,10 @@
 import { useEffect, useState } from "react";
-import type { gameStateType, squaresType, playType } from "../types/types";
+import {
+  type gameStateType,
+  type squaresType,
+  type playType,
+  type players,
+} from "../types/types";
 import isNulled from "../utils/isNulled";
 import getGameState from "../utils/getGameState";
 
@@ -10,6 +15,8 @@ export default function Game({
   setSquares,
   play,
   setPlay,
+  p1,
+  p2,
 }: {
   gameState: gameStateType;
   setGameState: React.Dispatch<React.SetStateAction<gameStateType>>;
@@ -17,6 +24,8 @@ export default function Game({
   setSquares: React.Dispatch<React.SetStateAction<squaresType>>;
   play: playType;
   setPlay: React.Dispatch<React.SetStateAction<playType>>;
+  p1: players;
+  p2: players;
 }) {
   const [turn, setTurn] = useState<string>("x");
   function handleClick(index: number) {
@@ -27,14 +36,11 @@ export default function Game({
     const newSquares = [...squares];
     newSquares[index] = turn;
     setSquares(newSquares);
-
-    // 3. Switch turn
   }
 
   // Handle Game State Logic whenever squares change
   useEffect(() => {
     const nulled = isNulled(squares);
-    console.log(nulled);
     if (!nulled) {
       const state = getGameState(squares);
       setGameState(state);
@@ -43,8 +49,6 @@ export default function Game({
         setTurn(turn === "x" ? "o" : "x");
       }
     }
-    // Note: Don't reset squares here automatically if you want
-    // the user to see the "Winner" screen!
   }, [squares, setGameState]);
 
   const handleRestart = () => {
@@ -90,6 +94,22 @@ export default function Game({
           </div>
         ))}
       </div>
+      <div className="results">
+        <div className="player">
+          <span>{`X(${p1})`}</span>
+          <span>0</span>
+        </div>
+        <div className="ties">
+          <span>TIES</span>
+          <span>0</span>
+        </div>
+        <div className="player">
+          {" "}
+          <span>{`Y(${p2})`}</span>
+          <span>0</span>
+        </div>
+      </div>
+
       <div className="foot"></div>
     </section>
   );

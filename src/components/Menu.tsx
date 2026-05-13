@@ -1,15 +1,47 @@
-import type { gameStateType, playType } from "../types/types";
+import { useEffect } from "react";
+import type { gameStateType, playType, players } from "../types/types";
 
 export default function Menu({
   play,
   setPlay,
   setGameState,
+  setP1,
+  setP2,
 }: {
   play: playType;
   setPlay: React.Dispatch<React.SetStateAction<playType>>;
   setGameState: React.Dispatch<React.SetStateAction<gameStateType>>;
+  setP1: React.Dispatch<React.SetStateAction<players>>;
+  setP2: React.Dispatch<React.SetStateAction<players>>;
 }) {
   const baseUrl = import.meta.env.BASE_URL;
+
+  useEffect(() => {
+    switch (`${play.player}-${play.against}`) {
+      case "X-CPU":
+        setP1("YOU");
+        setP2("CPU");
+        break;
+
+      case "O-CPU":
+        setP1("CPU");
+        setP2("YOU");
+        break;
+
+      case "X-P2":
+        setP1("YOU");
+        setP2("P2");
+        break;
+
+      case "O-P2":
+        setP1("P2");
+        setP2("YOU");
+        break;
+
+      default:
+        break;
+    }
+  }, [play, setP1, setP2]);
   return (
     <section className="menu">
       <img src={`${baseUrl}/assets/logo.svg`} alt="Logo" />
@@ -17,14 +49,14 @@ export default function Menu({
         <h3>PICK PLAYER 1'S MARK</h3>
         <div className="mark-icons">
           <button
-            className={`x bg ${play.player === "x" && "active"} `}
-            onClick={(_) => setPlay({ ...play, player: "x" })}
+            className={`x bg ${play.player === "X" && "active"} `}
+            onClick={(_) => setPlay({ ...play, player: "X" })}
           >
             <img src={`${baseUrl}/assets/icon-x.svg`} alt="X" />
           </button>
           <button
-            className={`o bg ${play.player === "o" && "active"}`}
-            onClick={(_) => setPlay({ ...play, player: "o" })}
+            className={`o bg ${play.player === "O" && "active"}`}
+            onClick={(_) => setPlay({ ...play, player: "O" })}
           >
             <img src={`${baseUrl}/assets/icon-o.svg`} alt="O" />
           </button>
@@ -35,7 +67,7 @@ export default function Menu({
         className="menu-btn cpu"
         onClick={() => {
           setGameState({ status: "ongoing" });
-          setPlay({ player: "x", against: "cpu" });
+          setPlay({ ...play, against: "CPU" });
         }}
       >
         NEW GAME (VS CPU)
@@ -44,7 +76,7 @@ export default function Menu({
         className="menu-btn player"
         onClick={() => {
           setGameState({ status: "ongoing" });
-          setPlay({ player: "x", against: "player" });
+          setPlay({ ...play, against: "P2" });
         }}
       >
         NEW GAME (VS PLAYER)
