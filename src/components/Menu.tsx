@@ -16,35 +16,20 @@ export default function Menu({
 }) {
   const baseUrl = import.meta.env.BASE_URL;
 
-  function setPlayers(players: string) {
-    switch (players) {
-      case "X-CPU":
-        setPX("YOU");
-        setPO("CPU");
-        break;
-
-      case "O-CPU":
-        setPX("CPU");
-        setPO("YOU");
-        break;
-
-      case "X-P2":
-        setPX("P1");
-        setPO("P2");
-        break;
-
-      case "O-P2":
-        setPX("P2");
-        setPO("P1");
-        break;
-
-      default:
-        break;
+  const handleStartGame = (against: "CPU" | "P2") => {
+    // 1. Calculate labels based on current mark selection
+    if (against === "CPU") {
+      setPX(play.player === "X" ? "YOU" : "CPU");
+      setPO(play.player === "O" ? "YOU" : "CPU");
+    } else {
+      setPX(play.player === "X" ? "P1" : "P2");
+      setPO(play.player === "O" ? "P1" : "P2");
     }
-  }
-  useEffect(() => {
-    setPlayers(`${play.player}-${play.against}`);
-  }, [play, setPX, setPO]);
+
+    // 2. Set the play mode and start the game
+    setPlay({ ...play, against });
+    setGameState({ status: "ongoing", winner: "draw" });
+  };
 
   return (
     <section className="menu">
@@ -70,8 +55,7 @@ export default function Menu({
       <button
         className="menu-btn cpu"
         onClick={() => {
-          setGameState({ status: "ongoing", winner: "draw" });
-          setPlay({ ...play, against: "CPU" });
+          handleStartGame("CPU");
         }}
       >
         NEW GAME (VS CPU)
@@ -79,8 +63,7 @@ export default function Menu({
       <button
         className="menu-btn player"
         onClick={() => {
-          setGameState({ status: "ongoing", winner: "draw" });
-          setPlay({ ...play, against: "P2" });
+          handleStartGame("P2");
         }}
       >
         NEW GAME (VS PLAYER)

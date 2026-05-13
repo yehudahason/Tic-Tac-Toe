@@ -48,6 +48,7 @@ const Home = () => {
           setResults={setResults}
         />
       )}
+
       <Footer />
     </>
   );

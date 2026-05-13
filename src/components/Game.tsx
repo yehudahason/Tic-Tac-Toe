@@ -14,8 +14,6 @@ export default function Game({
   setGameState,
   squares,
   setSquares,
-  play,
-  setPlay,
   pX,
   pO,
   results,

@@ -1,13 +1,12 @@
-import calculateWinner from './calculateWinner';
-import type { moveType , squaresType} from '../types/types';
+import calculateWinner from "./calculateWinner";
+import type { moveType, squaresType } from "../types/types";
 
 function minimax(
-  board: squaresType, 
-  player: string, 
-  cpuPlayer: string, 
-  humanPlayer: string
+  board: squaresType,
+  player: "X" | "O",
+  cpuPlayer: "X" | "O",
+  humanPlayer: "X" | "O",
 ): moveType {
-  
   const winner = calculateWinner(board);
   if (winner === cpuPlayer) return { score: 10 };
   if (winner === humanPlayer) return { score: -10 };
@@ -18,15 +17,15 @@ function minimax(
   for (let i = 0; i < board.length; i++) {
     if (board[i] === null) {
       board[i] = player; // Simulate move
-      
+
       // Determine score recursively
       const result = minimax(
-        board, 
-        player === cpuPlayer ? humanPlayer : cpuPlayer, 
-        cpuPlayer, 
-        humanPlayer
+        board,
+        player === cpuPlayer ? humanPlayer : cpuPlayer,
+        cpuPlayer,
+        humanPlayer,
       );
-      
+
       moves.push({ index: i, score: result.score });
       board[i] = null; // Backtrack
     }
