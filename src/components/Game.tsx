@@ -10,7 +10,7 @@ import isNulled from "../utils/isNulled";
 import getGameState from "../utils/getGameState";
 import getDefensiveMove from "../utils/getDefensiveMove";
 import getIntermediateMove from "../utils/getIntermidateMove";
-import minimax from "../utils/minimax";
+import getAdvanceMove from "../utils/minimax";
 
 export default function Game({
   gameState,
@@ -60,7 +60,7 @@ export default function Game({
             console.log("medium move");
             break;
           case "HARD":
-            move = minimax([...squares], cpuPiece, humanPiece);
+            move = getAdvanceMove([...squares], cpuPiece, humanPiece);
             console.log("hard move");
 
             break;

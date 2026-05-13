@@ -51,6 +51,23 @@ export default function Menu({
         </div>
         <h4>REMEMBER: X GOES FIRST</h4>
       </div>
+
+      <button
+        className="menu-btn cpu"
+        onClick={() => {
+          handleStartGame("CPU");
+        }}
+      >
+        NEW GAME (VS CPU)
+      </button>
+      <button
+        className="menu-btn player"
+        onClick={() => {
+          handleStartGame("P2");
+        }}
+      >
+        NEW GAME (VS PLAYER)
+      </button>
       <div className="difficulty-select">
         <h3>DIFFICULTY</h3>
         <div className="diff-options">
@@ -74,22 +91,6 @@ export default function Menu({
           </button>
         </div>
       </div>
-      <button
-        className="menu-btn cpu"
-        onClick={() => {
-          handleStartGame("CPU");
-        }}
-      >
-        NEW GAME (VS CPU)
-      </button>
-      <button
-        className="menu-btn player"
-        onClick={() => {
-          handleStartGame("P2");
-        }}
-      >
-        NEW GAME (VS PLAYER)
-      </button>
     </section>
   );
 }

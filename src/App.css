@@ -296,6 +296,9 @@ h4 {
 .player:nth-child(3) {
   background-color: var(--color-amber-400);
 }
+.difficulty-select {
+  margin-top: -1rem;
+}
 .diff-options {
   display: flex;
   justify-content: center;
