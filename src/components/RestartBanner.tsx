@@ -27,6 +27,7 @@ export default function RestartBanner({
     document.body.classList.remove("end");
     window.location.reload();
     setGameState({ status: "notStarted", winner: "draw" });
+    localStorage.setItem("tic-tac-toe-results", "");
   }
   useEffect(() => {
     document.body.classList.add("end");

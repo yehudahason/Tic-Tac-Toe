@@ -1,7 +1,7 @@
 import Menu from "../components/Menu";
 import Game from "../components/Game";
 import Footer from "../components/Footer";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   type gameStateType,
   type playType,
@@ -25,12 +25,16 @@ const Home = () => {
   const [squares, setSquares] = useState<squaresType>(Array(9).fill(null));
   const [pX, setPX] = useState<players>("YOU");
   const [pO, setPO] = useState<players>("CPU");
-  const [results, setResults] = useState<results>({
-    X: 0,
-    O: 0,
-    draw: 0,
+  const [results, setResults] = useState(() => {
+    const saved = localStorage.getItem("tic-tac-toe-results");
+    return saved ? JSON.parse(saved) : { X: 0, O: 0, draw: 0 };
   });
   const [turn, setTurn] = useState<string>("x");
+
+  useEffect(() => {
+    const saved = localStorage.getItem("tic-tac-toe-results");
+    if (saved) setGameState({ status: "ongoing", winner: "draw" });
+  }, []);
   return (
     <>
       {gameState.status === "notStarted" ? (

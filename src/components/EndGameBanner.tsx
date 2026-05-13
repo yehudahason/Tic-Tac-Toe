@@ -26,6 +26,12 @@ export default function EndGameBanner({
     setTurn("x");
     setGameState({ status: "ongoing", winner: "draw" }); // Reset status
   };
+  function endGame() {
+    document.body.classList.remove("end");
+    window.location.reload();
+    setGameState({ status: "notStarted", winner: "draw" });
+    localStorage.setItem("tic-tac-toe-results", "");
+  }
 
   useEffect(() => {
     const { winner } = gameState;
@@ -49,11 +55,6 @@ export default function EndGameBanner({
     }
   }, [play, gameState]);
 
-  function endGame() {
-    document.body.classList.remove("end");
-    window.location.reload();
-    setGameState({ status: "notStarted", winner: "draw" });
-  }
   useEffect(() => {
     document.body.classList.add("end");
     return () => {

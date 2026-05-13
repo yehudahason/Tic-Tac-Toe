@@ -117,6 +117,10 @@ export default function Game({
         break;
     }
   }
+  useEffect(() => {
+    // Save the current results object as a JSON string
+    localStorage.setItem("tic-tac-toe-results", JSON.stringify(results));
+  }, [results]);
   // Handle Game State Logic whenever squares change
   useEffect(() => {
     const nulled = isNulled(squares);
