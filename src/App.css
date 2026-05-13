@@ -375,8 +375,6 @@ h4 {
   justify-content: center;
   align-items: center;
   gap: 1rem;
-  font: var(--preset-4);
-  letter-spacing: var(--ls-4);
 }
 
 .end-btn button {
@@ -385,6 +383,10 @@ h4 {
   padding: 0.8rem 1.2rem;
   background-color: var(--color-slate-300);
   border: none;
+  color: var(--color-slate-950);
+  font: var(--preset-4);
+  letter-spacing: var(--ls-4);
+  font-weight: 600;
 }
 .end-btn button:nth-child(2) {
   background-color: var(--color-amber-400);
@@ -443,5 +445,12 @@ h4 {
   .takes img {
     height: 2rem;
     width: auto;
+  }
+  .restart-msg {
+    font: var(--preset-2);
+    letter-spacing: var(--ls-2);
+  }
+  .end-btn button {
+    padding: 0.5rem;
   }
 }
