@@ -238,6 +238,7 @@ h4 {
   height: 133px;
   display: flex;
   justify-content: center;
+  border: none;
 }
 .cell {
   display: grid;

@@ -154,7 +154,8 @@ export default function Game({
       </div>
       <div className="board">
         {squares.map((square, index) => (
-          <div
+          <button
+            type="button"
             className={`cell c-${index + 1}`}
             key={index}
             onClick={(_) => handleClick(index)}
@@ -177,7 +178,7 @@ export default function Game({
                 alt=""
               />
             )}
-          </div>
+          </button>
         ))}
       </div>
       <div className="results">

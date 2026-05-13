@@ -37,12 +37,14 @@ export default function Menu({
         <h3>PICK PLAYER 1'S MARK</h3>
         <div className="mark-icons">
           <button
+            type="button"
             className={`x bg ${play.player === "X" && "active"} `}
             onClick={(_) => setPlay({ ...play, player: "X" })}
           >
             <img src={`${baseUrl}/assets/icon-x.svg`} alt="X" />
           </button>
           <button
+            type="button"
             className={`o bg ${play.player === "O" && "active"}`}
             onClick={(_) => setPlay({ ...play, player: "O" })}
           >
@@ -53,6 +55,7 @@ export default function Menu({
       </div>
 
       <button
+        type="button"
         className="menu-btn cpu"
         onClick={() => {
           handleStartGame("CPU");
@@ -61,6 +64,7 @@ export default function Menu({
         NEW GAME (VS CPU)
       </button>
       <button
+        type="button"
         className="menu-btn player"
         onClick={() => {
           handleStartGame("P2");
@@ -72,18 +76,21 @@ export default function Menu({
         <h3>DIFFICULTY</h3>
         <div className="diff-options">
           <button
+            type="button"
             className={`diff-btn ${play.difficulty === "EASY" ? "active" : ""}`}
             onClick={() => setPlay({ ...play, difficulty: "EASY" })}
           >
             EASY
           </button>
           <button
+            type="button"
             className={`diff-btn ${play.difficulty === "MEDIUM" ? "active" : ""}`}
             onClick={() => setPlay({ ...play, difficulty: "MEDIUM" })}
           >
             INTERMEDIATE
           </button>
           <button
+            type="button"
             className={`diff-btn ${play.difficulty === "HARD" ? "active" : ""}`}
             onClick={() => setPlay({ ...play, difficulty: "HARD" })}
           >
