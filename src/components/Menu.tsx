@@ -16,8 +16,8 @@ export default function Menu({
 }) {
   const baseUrl = import.meta.env.BASE_URL;
 
-  useEffect(() => {
-    switch (`${play.player}-${play.against}`) {
+  function setPlayers(players: string) {
+    switch (players) {
       case "X-CPU":
         setP1("YOU");
         setP2("CPU");
@@ -29,19 +29,23 @@ export default function Menu({
         break;
 
       case "X-P2":
-        setP1("YOU");
+        setP1("P1");
         setP2("P2");
         break;
 
       case "O-P2":
         setP1("P2");
-        setP2("YOU");
+        setP2("P1");
         break;
 
       default:
         break;
     }
+  }
+  useEffect(() => {
+    setPlayers(`${play.player}-${play.against}`);
   }, [play, setP1, setP2]);
+
   return (
     <section className="menu">
       <img src={`${baseUrl}/assets/logo.svg`} alt="Logo" />

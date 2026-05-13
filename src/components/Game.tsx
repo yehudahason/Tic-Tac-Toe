@@ -27,6 +27,7 @@ export default function Game({
   p1: players;
   p2: players;
 }) {
+  const baseUrl = import.meta.env.BASE_URL;
   const [turn, setTurn] = useState<string>("x");
   function handleClick(index: number) {
     // 1. Guard clause: Stop if square is filled or game is over
@@ -38,6 +39,11 @@ export default function Game({
     setSquares(newSquares);
   }
 
+  const handleRestart = () => {
+    setSquares(Array(9).fill(null));
+    setTurn("x");
+    setGameState({ status: "ongoing", winner: undefined }); // Reset status
+  };
   // Handle Game State Logic whenever squares change
   useEffect(() => {
     const nulled = isNulled(squares);
@@ -50,13 +56,6 @@ export default function Game({
       }
     }
   }, [squares, setGameState]);
-
-  const handleRestart = () => {
-    setSquares(Array(9).fill(null));
-    setTurn("x");
-    setGameState({ status: "ongoing", winner: undefined }); // Reset status
-  };
-  const baseUrl = import.meta.env.BASE_URL;
   return (
     <section className="game">
       <div className="head">
