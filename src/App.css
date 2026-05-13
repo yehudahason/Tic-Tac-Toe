@@ -54,6 +54,7 @@
 }
 
 #root {
+  display: flex;
   max-width: 1440px;
   margin: 0;
   padding: 0rem;
@@ -78,13 +79,15 @@ body {
 
 body.end::after {
   content: "";
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  min-height: 100vh;
   background-color: rgba(0, 0, 0, 0.4);
   z-index: 2;
+  background-attachment: fixed;
+  margin: 0;
 }
 .menu {
   display: flex;
@@ -348,6 +351,7 @@ h4 {
 .end-game-banner {
   position: absolute;
   width: 100%;
+  max-width: 1440px;
   height: 200px;
   padding: 1rem;
   background-color: var(--color-slate-800);
@@ -396,18 +400,18 @@ h4 {
   font: var(--preset-4);
   letter-spacing: var(--ls-4);
   font-weight: 600;
-  box-shadow: 0px 4px 0px #7e96a0;
+  box-shadow: 0px 3px 0px #7e96a0;
 }
 .end-btn button:nth-child(2) {
   background-color: var(--color-amber-400);
-  box-shadow: 0px 4px 0px #bc8b2e;
+  box-shadow: 0px 3px 0px #bc8b2e;
 }
 .restart-msg {
   font: var(--preset-1);
   letter-spacing: var(--ls-1);
   color: var(--color-slate-300);
 }
-@media (max-width: 500px) {
+@media (max-width: 32rem) {
   .mark-icons,
   .mark {
     width: 100%;
