@@ -15,7 +15,11 @@ const Home = () => {
     status: "notStarted",
     winner: "draw",
   });
-  const [play, setPlay] = useState<playType>({ player: "X", against: "CPU" });
+  const [play, setPlay] = useState<playType>({
+    player: "X",
+    against: "CPU",
+    difficulty: "EASY",
+  });
   const [squares, setSquares] = useState<squaresType>(Array(9).fill(null));
   const [pX, setPX] = useState<players>("YOU");
   const [pO, setPO] = useState<players>("CPU");

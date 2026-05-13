@@ -296,7 +296,30 @@ h4 {
 .player:nth-child(3) {
   background-color: var(--color-amber-400);
 }
+.diff-options {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+}
 
+.diff-options button {
+  font: var(--preset-4);
+  letter-spacing: var(--ls-4);
+  border-radius: 10px;
+  cursor: pointer;
+  padding: 0.7rem 1rem;
+  background-color: var(--color-slate-300);
+  border: none;
+  color: var(--color-slate-950);
+}
+.diff-options button:hover {
+  background-color: var(--color-amber-300);
+}
+.diff-options button.active {
+  background-color: var(--color-amber-300);
+}
 @media (max-width: 500px) {
   .mark-icons,
   .mark {

@@ -51,6 +51,29 @@ export default function Menu({
         </div>
         <h4>REMEMBER: X GOES FIRST</h4>
       </div>
+      <div className="difficulty-select">
+        <h3>DIFFICULTY</h3>
+        <div className="diff-options">
+          <button
+            className={`diff-btn ${play.difficulty === "EASY" ? "active" : ""}`}
+            onClick={() => setPlay({ ...play, difficulty: "EASY" })}
+          >
+            EASY
+          </button>
+          <button
+            className={`diff-btn ${play.difficulty === "MEDIUM" ? "active" : ""}`}
+            onClick={() => setPlay({ ...play, difficulty: "MEDIUM" })}
+          >
+            INTERMEDIATE
+          </button>
+          <button
+            className={`diff-btn ${play.difficulty === "HARD" ? "active" : ""}`}
+            onClick={() => setPlay({ ...play, difficulty: "HARD" })}
+          >
+            HARD
+          </button>
+        </div>
+      </div>
       <button
         className="menu-btn cpu"
         onClick={() => {

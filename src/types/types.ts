@@ -4,7 +4,11 @@ export type gameStateType = {
   status: "notStarted" | "ongoing" | "draw" | "winner";
   winner: "X" | "O" | "draw";
 };
-export type playType = { player: "X" | "O"; against: "P2" | "CPU" };
+export type playType = {
+  player: "X" | "O";
+  against: "P2" | "CPU";
+  difficulty: "EASY" | "MEDIUM" | "HARD";
+};
 export type players = "YOU" | "P1" | "CPU" | "P2";
 export type results = {
   X: number;

@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   type gameStateType,
   type squaresType,
@@ -8,9 +8,9 @@ import {
 } from "../types/types";
 import isNulled from "../utils/isNulled";
 import getGameState from "../utils/getGameState";
+import getDefensiveMove from "../utils/getDefensiveMove";
 import getIntermediateMove from "../utils/getIntermidateMove";
 import minimax from "../utils/minimax";
-import getDefensiveMove from "../utils/getDefensiveMove";
 
 export default function Game({
   gameState,
@@ -48,7 +48,24 @@ export default function Game({
         const humanPiece = turn === "x" ? "o" : "x";
 
         // 2. Call the advanced algorithm
-        const move = getDefensiveMove([...squares], cpuPiece, humanPiece);
+        let move = null;
+        switch (play.difficulty) {
+          case "EASY":
+            move = getIntermediateMove([...squares], cpuPiece, humanPiece);
+            console.log("easy move");
+
+            break;
+          case "MEDIUM":
+            move = getDefensiveMove([...squares], cpuPiece, humanPiece);
+            console.log("medium move");
+            break;
+          case "HARD":
+            move = minimax([...squares], cpuPiece, humanPiece);
+            console.log("hard move");
+
+            break;
+          default:
+        }
 
         // 3. Apply the move if one was found
         if (move !== null) {
