@@ -27,7 +27,7 @@ export default function Menu({
 
     // 2. Set the play mode and start the game
     setPlay({ ...play, against });
-    setGameState({ status: "ongoing", winner: "draw" });
+    setGameState({ status: "ongoing", winner: "draw", line: null });
   };
 
   return (

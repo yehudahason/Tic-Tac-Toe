@@ -16,6 +16,7 @@ const Home = () => {
   const [gameState, setGameState] = useState<gameStateType>({
     status: "notStarted",
     winner: "draw",
+    line: null,
   });
   const [play, setPlay] = useState<playType>({
     player: "X",
@@ -30,10 +31,24 @@ const Home = () => {
     return saved ? JSON.parse(saved) : { X: 0, O: 0, draw: 0 };
   });
   const [turn, setTurn] = useState<string>("x");
+  const [showBanner, setShowBanner] = useState(false);
+
+  useEffect(() => {
+    if (gameState.status === "winner" || gameState.status === "draw") {
+      const timer = setTimeout(() => {
+        setShowBanner(true);
+      }, 2000);
+
+      // Clean up timer if the component unmounts or status changes
+      return () => clearTimeout(timer);
+    } else {
+      setShowBanner(false);
+    }
+  }, [gameState.status]);
 
   useEffect(() => {
     const saved = localStorage.getItem("tic-tac-toe-results");
-    if (saved) setGameState({ status: "ongoing", winner: "draw" });
+    if (saved) setGameState({ status: "ongoing", winner: "draw", line: null });
   }, []);
   return (
     <>
@@ -61,15 +76,17 @@ const Home = () => {
           setTurn={setTurn}
         />
       )}
-      {(gameState.status === "draw" || gameState.status === "winner") && (
-        <EndGameBanner
-          gameState={gameState}
-          setGameState={setGameState}
-          play={play}
-          setTurn={setTurn}
-          setSquares={setSquares}
-        />
-      )}
+      {showBanner &&
+        gameState.status === "winner" &&
+        gameState.winner !== "draw" && (
+          <EndGameBanner
+            gameState={gameState}
+            setGameState={setGameState}
+            play={play}
+            setTurn={setTurn}
+            setSquares={setSquares}
+          />
+        )}
       {gameState.status === "stopped" && (
         <RestartBanner
           gameState={gameState}

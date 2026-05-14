@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import {
   type gameStateType,
   type squaresType,
@@ -39,7 +39,7 @@ export default function Game({
   setTurn: React.Dispatch<React.SetStateAction<string>>;
 }) {
   const baseUrl = import.meta.env.BASE_URL;
-
+  const [wline, setWline] = useState<number[] | null>(null);
   useEffect(() => {
     // Determine if it's currently the CPU's turn
     const isCpuTurn =
@@ -93,7 +93,7 @@ export default function Game({
   }
 
   const handleRestart = () => {
-    setGameState({ status: "stopped", winner: "draw" });
+    setGameState({ status: "stopped", winner: "draw", line: null });
   };
 
   function calculateResults(state: gameStateType) {
@@ -124,14 +124,24 @@ export default function Game({
     const nulled = isNulled(squares);
     if (!nulled) {
       const state = getGameState(squares);
+      if (state.status === "winner") {
+        setWline(state.line);
+      } else {
+        setWline(null);
+      }
+
       setGameState(state);
 
       if (state.status === "ongoing") {
         setTurn(turn === "x" ? "o" : "x");
+        setWline(null);
       }
       calculateResults(state);
+      return () => {
+        setWline(null);
+      };
     }
-  }, [squares, setGameState]);
+  }, [squares, setGameState, setWline, setTurn]);
   return (
     <section className="game">
       <div className="head">
@@ -154,9 +164,9 @@ export default function Game({
         {squares.map((square, index) => (
           <button
             type="button"
-            className={`cell c-${index + 1}`}
+            className={`cell c-${index + 1} ${wline?.includes(index) ? "highlight" : ""}`}
             key={index}
-            onClick={(_) => handleClick(index)}
+            onClick={() => handleClick(index)}
           >
             <img
               src={

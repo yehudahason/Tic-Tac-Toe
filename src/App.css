@@ -256,6 +256,9 @@ h4 {
   height: 63px;
   width: auto;
 }
+.board .cell.highlight {
+  background-color: var(--color-slate-300);
+}
 .restart {
   justify-self: end;
   padding: 0.5rem;
@@ -425,6 +428,7 @@ h4 {
     width: 100%;
     height: clamp(80px, 100px, 120px);
   }
+
   .cell img {
     height: auto;
     width: 40px;

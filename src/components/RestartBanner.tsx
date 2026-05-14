@@ -20,13 +20,13 @@ export default function RestartBanner({
     document.body.classList.remove("end");
     setSquares(Array(9).fill(null));
     setTurn("x");
-    setGameState({ status: "ongoing", winner: "draw" }); // Reset status
+    setGameState({ status: "ongoing", winner: "draw", line: null }); // Reset status
   };
 
   function endGame() {
     document.body.classList.remove("end");
     window.location.reload();
-    setGameState({ status: "notStarted", winner: "draw" });
+    setGameState({ status: "notStarted", winner: "draw", line: null });
     localStorage.setItem("tic-tac-toe-results", "");
   }
   useEffect(() => {

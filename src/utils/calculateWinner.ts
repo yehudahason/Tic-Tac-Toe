@@ -3,7 +3,8 @@
  * @param {Array} squares - An array of 9 strings (e.g., ['X', 'O', null, ...])
  * @returns {string|null} - Returns 'X', 'O', or null if no winner yet.
  */
-function calculateWinner(squares: ("X" | "O" | null)[]): "X" | "O" | null {
+import type { winner } from "../types/types";
+function calculateWinner(squares: ("X" | "O" | null)[]): winner | null {
   const lines = [
     [0, 1, 2],
     [3, 4, 5],
@@ -19,7 +20,7 @@ function calculateWinner(squares: ("X" | "O" | null)[]): "X" | "O" | null {
     const [a, b, c] = lines[i];
     // Check if the first square is not empty and matches the next two
     if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-      return squares[a];
+      return { winner: squares[a], line: lines[i] };
     }
   }
 

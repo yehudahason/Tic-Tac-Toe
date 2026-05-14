@@ -2,7 +2,8 @@ export type moveType = { index?: number; score: number };
 export type squaresType = ("X" | "O" | null)[];
 export type gameStateType = {
   status: "notStarted" | "ongoing" | "draw" | "winner" | "stopped";
-  winner: "X" | "O" | "draw";
+  winner: "X" | "O" | "draw" | null;
+  line: number[] | null;
 };
 export type playType = {
   player: "X" | "O";
@@ -15,3 +16,5 @@ export type results = {
   O: number;
   draw: number;
 };
+
+export type winner = { winner: "X" | "O" | "draw" | null; line: number[] };
