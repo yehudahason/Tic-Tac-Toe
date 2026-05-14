@@ -64,8 +64,20 @@ export default function EndGameBanner({
     };
   }, []);
   return (
-    <section className="end-game-banner">
-      <p className="winner">{winner}</p>
+    <section
+      className="end-game-banner"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="game-result-title"
+    >
+      <p
+        className="winner"
+        id="game-result-title"
+        role="status"
+        aria-live="polite"
+      >
+        {winner}
+      </p>
       <div className={`takes ${gameState.winner}`}>
         {gameState.winner !== "draw" && (
           <>

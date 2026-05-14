@@ -32,9 +32,15 @@ export default function RestartBanner({
     };
   }, []);
   return (
-    <section className="end-game-banner">
-      <p className="restart-msg">RESTART GAME?</p>
-
+    <section
+      className="end-game-banner"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="restart-title"
+    >
+      <p className="restart-msg" id="restart-title">
+        RESTART GAME?
+      </p>
       <div className="end-btn">
         <button type="button" onClick={(_) => nextRound()}>
           NO CANCEL
