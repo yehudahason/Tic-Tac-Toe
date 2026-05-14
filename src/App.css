@@ -67,6 +67,10 @@
   width: 100%;
 }
 
+button:focus {
+  outline: 1px solid var(--color-slate-300);
+  outline-offset: 2px;
+}
 body {
   font-family: "Outfit", sans-serif;
   background-color: var(--color-slate-900);

@@ -4,6 +4,7 @@ import {
   type playType,
   type squaresType,
 } from "../types/types";
+import { FocusTrap } from "focus-trap-react";
 
 export default function EndGameBanner({
   gameState,
@@ -57,46 +58,58 @@ export default function EndGameBanner({
   }, [play, gameState]);
 
   useEffect(() => {
+    // Grab your main app container
+    const mainContent = document.querySelector(".game");
+
     document.body.classList.add("end");
     inputRef.current?.focus();
+
+    // Make the background non-interactive
+    mainContent?.setAttribute("aria-hidden", "true");
+    mainContent?.setAttribute("inert", "");
+
     return () => {
       document.body.classList.remove("end");
+      mainContent?.removeAttribute("aria-hidden");
+      mainContent?.removeAttribute("inert");
     };
   }, []);
   return (
-    <section
-      className="end-game-banner"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="game-result-title"
-    >
-      <p
-        className="winner"
-        id="game-result-title"
-        role="status"
-        aria-live="polite"
+    <FocusTrap>
+      <section
+        className="end-game-banner"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="game-result-title"
       >
-        {winner}
-      </p>
-      <div className={`takes ${gameState.winner}`}>
-        {gameState.winner !== "draw" && (
-          <>
-            <img
-              src={`${baseUrl}/assets/icon-${gameState.winner?.toLocaleLowerCase()}.svg`}
-              alt="won"
-            />
-            <span>TAKES THE ROUND</span>
-          </>
-        )}
-      </div>
-      <div className="end-btn">
-        <button type="button" onClick={(_) => endGame()}>
-          QUIT
-        </button>
-        <button ref={inputRef} type="button" onClick={(_) => nextRound()}>
-          NEXT ROUND
-        </button>
-      </div>
-    </section>
+        <p
+          className="winner"
+          id="game-result-title"
+          role="status"
+          aria-live="polite"
+        >
+          {winner}
+        </p>
+        <div className={`takes ${gameState.winner}`}>
+          {gameState.winner !== "draw" && (
+            <>
+              <img
+                src={`${baseUrl}/assets/icon-${gameState.winner?.toLocaleLowerCase()}.svg`}
+                alt="won"
+              />
+              <span>TAKES THE ROUND</span>
+            </>
+          )}
+        </div>
+        <div className="end-btn">
+          <button type="button" onClick={(_) => endGame()}>
+            QUIT
+          </button>
+          <button ref={inputRef} type="button" onClick={(_) => nextRound()}>
+            NEXT ROUND
+          </button>
+        </div>
+      </section>
+    </FocusTrap>
   );
 }
