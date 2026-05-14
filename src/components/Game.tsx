@@ -8,8 +8,8 @@ import {
 } from "../types/types";
 import isNulled from "../utils/isNulled";
 import getGameState from "../utils/getGameState";
-import getDefensiveMove from "../utils/getDefensiveMove";
-import getAdvanceMove from "../utils/minimax";
+import interCpuMove from "../utils/intermediateCpuMove";
+import getAdvanceMove from "../utils/advanceCpuMove";
 import getRandomMove from "../utils/getRandomMove";
 
 export default function Game({
@@ -59,7 +59,7 @@ export default function Game({
 
             break;
           case "MEDIUM":
-            move = getDefensiveMove([...squares], cpuPiece, humanPiece);
+            move = interCpuMove([...squares], cpuPiece, humanPiece);
 
             break;
           case "HARD":
