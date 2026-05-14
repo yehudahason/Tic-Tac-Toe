@@ -22,8 +22,8 @@ export default function RestartBanner({
   function endGame() {
     document.body.classList.remove("end");
     window.location.reload();
-    setGameState({ status: "notStarted", winner: "draw", line: null });
-    localStorage.setItem("tic-tac-toe-results", "");
+
+    localStorage.removeItem("tic-tac-toe-results");
   }
   useEffect(() => {
     // Grab your main app container

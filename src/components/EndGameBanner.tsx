@@ -32,7 +32,7 @@ export default function EndGameBanner({
     document.body.classList.remove("end");
     window.location.reload();
 
-    localStorage.setItem("tic-tac-toe-results", "");
+    localStorage.removeItem("tic-tac-toe-results");
   }
 
   useEffect(() => {
