@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import {
   type gameStateType,
   type playType,
@@ -18,6 +18,7 @@ export default function EndGameBanner({
   setTurn: React.Dispatch<React.SetStateAction<string>>;
   setSquares: React.Dispatch<React.SetStateAction<squaresType>>;
 }) {
+  const inputRef = useRef<HTMLButtonElement>(null);
   const baseUrl = import.meta.env.BASE_URL;
   const [winner, setWinner] = useState<string>("");
   const nextRound = () => {
@@ -29,7 +30,7 @@ export default function EndGameBanner({
   function endGame() {
     document.body.classList.remove("end");
     window.location.reload();
-    setGameState({ status: "notStarted", winner: "draw", line: null });
+
     localStorage.setItem("tic-tac-toe-results", "");
   }
 
@@ -57,6 +58,7 @@ export default function EndGameBanner({
 
   useEffect(() => {
     document.body.classList.add("end");
+    inputRef.current?.focus();
     return () => {
       document.body.classList.remove("end");
     };
@@ -79,7 +81,7 @@ export default function EndGameBanner({
         <button type="button" onClick={(_) => endGame()}>
           QUIT
         </button>
-        <button type="button" onClick={(_) => nextRound()}>
+        <button ref={inputRef} type="button" onClick={(_) => nextRound()}>
           NEXT ROUND
         </button>
       </div>

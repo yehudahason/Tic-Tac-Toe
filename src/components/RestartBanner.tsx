@@ -1,21 +1,16 @@
-import { useEffect } from "react";
-import {
-  type gameStateType,
-  type playType,
-  type squaresType,
-} from "../types/types";
+import { useEffect, useRef } from "react";
+import { type gameStateType, type squaresType } from "../types/types";
 
 export default function RestartBanner({
   setGameState,
   setTurn,
   setSquares,
 }: {
-  gameState: gameStateType;
   setGameState: React.Dispatch<React.SetStateAction<gameStateType>>;
-  play: playType;
   setTurn: React.Dispatch<React.SetStateAction<string>>;
   setSquares: React.Dispatch<React.SetStateAction<squaresType>>;
 }) {
+  const inputRef = useRef<HTMLButtonElement>(null);
   const nextRound = () => {
     document.body.classList.remove("end");
     setSquares(Array(9).fill(null));
@@ -31,6 +26,7 @@ export default function RestartBanner({
   }
   useEffect(() => {
     document.body.classList.add("end");
+    inputRef.current?.focus();
     return () => {
       document.body.classList.remove("end");
     };
@@ -43,7 +39,7 @@ export default function RestartBanner({
         <button type="button" onClick={(_) => nextRound()}>
           NO CANCEL
         </button>
-        <button type="button" onClick={(_) => endGame()}>
+        <button ref={inputRef} type="button" onClick={(_) => endGame()}>
           YES RESTART
         </button>
       </div>

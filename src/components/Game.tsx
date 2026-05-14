@@ -30,7 +30,6 @@ export default function Game({
   squares: squaresType;
   setSquares: React.Dispatch<React.SetStateAction<squaresType>>;
   play: playType;
-  setPlay: React.Dispatch<React.SetStateAction<playType>>;
   pX: players;
   pO: players;
   results: results;
@@ -146,9 +145,13 @@ export default function Game({
     <section className="game">
       <div className="head">
         <img src={`${baseUrl}/assets/logo.svg`} alt="logo" />
-        <div className="turn">
-          <img src={`${baseUrl}/assets/icon-${turn}.svg`} alt="turn" />
-          <span>TURN</span>
+        <div className="turn" aria-live="polite">
+          <img
+            src={`${baseUrl}/assets/icon-${turn}.svg`}
+            alt=""
+            aria-hidden="true"
+          />
+          <span> TURN</span>
         </div>
         <button
           type="button"
@@ -161,33 +164,41 @@ export default function Game({
         </button>
       </div>
       <div className="board">
-        {squares.map((square, index) => (
-          <button
-            type="button"
-            className={`cell c-${index + 1} ${wline?.includes(index) ? "highlight" : ""}`}
-            key={index}
-            onClick={() => handleClick(index)}
-          >
-            <img
-              src={
-                square === "X"
-                  ? `${baseUrl}/assets/icon-x.svg`
-                  : square === "O"
-                    ? `${baseUrl}/assets/icon-o.svg`
-                    : undefined
+        {squares.map((square, index) => {
+          const row = Math.floor(index / 3) + 1;
+          const col = (index % 3) + 1;
+          return (
+            <button
+              type="button"
+              className={`cell c-${index + 1} ${wline?.includes(index) ? "highlight" : ""}`}
+              key={index}
+              onClick={() => handleClick(index)}
+              aria-label={
+                square
+                  ? `${square} in row ${row} column ${col}`
+                  : `Empty square, row ${row} column ${col}. Click to play ${turn.toUpperCase()}`
               }
-            />
-            {square === "X" || square === "O" ? (
-              ""
-            ) : (
-              <img
-                className={`icon-hover`}
-                src={`${baseUrl}/assets/icon-${turn}-outline.svg`}
-                alt=""
-              />
-            )}
-          </button>
-        ))}
+            >
+              {square && (
+                <img
+                  src={`${baseUrl}/assets/icon-${square.toLowerCase()}.svg`}
+                  alt=""
+                  aria-hidden="true"
+                />
+              )}
+
+              {/* Only render the hover/outline icon if the square is empty */}
+              {!square && (
+                <img
+                  className="icon-hover"
+                  src={`${baseUrl}/assets/icon-${turn.toLowerCase()}-outline.svg`}
+                  alt=""
+                  aria-hidden="true"
+                />
+              )}
+            </button>
+          );
+        })}
       </div>
       <div className="results">
         <div className="player">

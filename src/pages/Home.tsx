@@ -67,7 +67,6 @@ const Home = () => {
           squares={squares}
           setSquares={setSquares}
           play={play}
-          setPlay={setPlay}
           pX={pX}
           pO={pO}
           results={results}
@@ -87,9 +86,7 @@ const Home = () => {
       )}
       {gameState.status === "stopped" && (
         <RestartBanner
-          gameState={gameState}
           setGameState={setGameState}
-          play={play}
           setTurn={setTurn}
           setSquares={setSquares}
         />
