@@ -21,7 +21,7 @@ const Home = () => {
   const [play, setPlay] = useState<playType>({
     player: "X",
     against: "CPU",
-    difficulty: "EASY",
+    difficulty: "MEDIUM",
   });
   const [squares, setSquares] = useState<squaresType>(Array(9).fill(null));
   const [pX, setPX] = useState<players>("YOU");
