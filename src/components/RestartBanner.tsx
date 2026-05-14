@@ -6,10 +6,12 @@ export default function RestartBanner({
   setGameState,
   setTurn,
   setSquares,
+  resetAll,
 }: {
   setGameState: React.Dispatch<React.SetStateAction<gameStateType>>;
   setTurn: React.Dispatch<React.SetStateAction<string>>;
   setSquares: React.Dispatch<React.SetStateAction<squaresType>>;
+  resetAll: () => void;
 }) {
   const inputRef = useRef<HTMLButtonElement>(null);
   const nextRound = () => {
@@ -21,9 +23,7 @@ export default function RestartBanner({
 
   function endGame() {
     document.body.classList.remove("end");
-    window.location.reload();
-
-    localStorage.removeItem("tic-tac-toe-results");
+    resetAll();
   }
   useEffect(() => {
     // Grab your main app container

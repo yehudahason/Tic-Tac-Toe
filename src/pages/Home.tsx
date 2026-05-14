@@ -33,6 +33,39 @@ const Home = () => {
   const [turn, setTurn] = useState<string>("x");
   const [showBanner, setShowBanner] = useState(false);
 
+  const resetAll = () => {
+    // remove localStorage
+    localStorage.removeItem("tic-tac-toe-results");
+
+    // reset states
+    setGameState({
+      status: "notStarted",
+      winner: "draw",
+      line: null,
+    });
+
+    setSquares(Array(9).fill(null));
+
+    setResults({
+      X: 0,
+      O: 0,
+      draw: 0,
+    });
+
+    setTurn("x");
+
+    setPlay({
+      player: "X",
+      against: "CPU",
+      difficulty: "MEDIUM",
+    });
+
+    setPX("YOU");
+    setPO("CPU");
+
+    setShowBanner(false);
+  };
+
   useEffect(() => {
     if (gameState.status === "winner" || gameState.status === "draw") {
       const timer = setTimeout(() => {
@@ -82,6 +115,7 @@ const Home = () => {
           play={play}
           setTurn={setTurn}
           setSquares={setSquares}
+          resetAll={resetAll}
         />
       )}
       {gameState.status === "stopped" && (
@@ -89,6 +123,7 @@ const Home = () => {
           setGameState={setGameState}
           setTurn={setTurn}
           setSquares={setSquares}
+          resetAll={resetAll}
         />
       )}
       <Footer />

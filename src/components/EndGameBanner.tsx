@@ -12,12 +12,14 @@ export default function EndGameBanner({
   play,
   setTurn,
   setSquares,
+  resetAll,
 }: {
   gameState: gameStateType;
   setGameState: React.Dispatch<React.SetStateAction<gameStateType>>;
   play: playType;
   setTurn: React.Dispatch<React.SetStateAction<string>>;
   setSquares: React.Dispatch<React.SetStateAction<squaresType>>;
+  resetAll: () => void;
 }) {
   const inputRef = useRef<HTMLButtonElement>(null);
   const baseUrl = import.meta.env.BASE_URL;
@@ -30,9 +32,8 @@ export default function EndGameBanner({
   };
   function endGame() {
     document.body.classList.remove("end");
-    window.location.reload();
 
-    localStorage.removeItem("tic-tac-toe-results");
+    resetAll();
   }
 
   useEffect(() => {
