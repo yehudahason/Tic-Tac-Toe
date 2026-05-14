@@ -37,7 +37,7 @@ const Home = () => {
     if (gameState.status === "winner" || gameState.status === "draw") {
       const timer = setTimeout(() => {
         setShowBanner(true);
-      }, 2000);
+      }, 1200);
 
       // Clean up timer if the component unmounts or status changes
       return () => clearTimeout(timer);
@@ -76,17 +76,15 @@ const Home = () => {
           setTurn={setTurn}
         />
       )}
-      {showBanner &&
-        gameState.status === "winner" &&
-        gameState.winner !== "draw" && (
-          <EndGameBanner
-            gameState={gameState}
-            setGameState={setGameState}
-            play={play}
-            setTurn={setTurn}
-            setSquares={setSquares}
-          />
-        )}
+      {showBanner && (
+        <EndGameBanner
+          gameState={gameState}
+          setGameState={setGameState}
+          play={play}
+          setTurn={setTurn}
+          setSquares={setSquares}
+        />
+      )}
       {gameState.status === "stopped" && (
         <RestartBanner
           gameState={gameState}
