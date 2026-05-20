@@ -5,8 +5,8 @@ function getRandomMove(squares: (string | null)[]): number | null {
     .map((val, idx) => (val === null ? idx : null))
     .filter((val) => val !== null);
 
-  const randomIndex = Math.floor(Math.random() * availableMoves.length);
   if (availableMoves.length === 0) return null;
+  const randomIndex = Math.floor(Math.random() * availableMoves.length);
   return availableMoves[randomIndex];
 }
 

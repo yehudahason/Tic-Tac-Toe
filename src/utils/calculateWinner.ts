@@ -1,7 +1,7 @@
 /**
  * Determines the winner of a Tic-Tac-Toe game.
  * @param {Array} squares - An array of 9 strings (e.g., ['X', 'O', null, ...])
- * @returns {string|null} - Returns 'X', 'O', or null if no winner yet.
+ * @returns {string|null ,string[]} - Returns 'X', 'O', or null if no winner yet. and the win line.
  */
 import type { winner } from "../types";
 function calculateWinner(squares: ("X" | "O" | null)[]): winner | null {
