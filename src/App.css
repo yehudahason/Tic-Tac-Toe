@@ -101,7 +101,7 @@ body.end::after {
   align-items: center;
 }
 
-h3 {
+h1 {
   font: var(--preset-4);
   letter-spacing: var(--ls-4);
   color: var(--color-slate-300);

@@ -34,10 +34,11 @@ export default function Menu({
     <section className="menu">
       <img src={`${baseUrl}/assets/logo.svg`} alt="Logo" />
       <div className="mark">
-        <h3>PICK PLAYER 1'S MARK</h3>
+        <h1>PICK PLAYER 1'S MARK</h1>
         <div className="mark-icons">
           <button
             type="button"
+            aria-lable="X mark selected"
             className={`x bg ${play.player === "X" && "active"} `}
             onClick={(_) => setPlay({ ...play, player: "X" })}
           >
@@ -45,6 +46,7 @@ export default function Menu({
           </button>
           <button
             type="button"
+            aria-lable="O mark selected"
             className={`o bg ${play.player === "O" && "active"}`}
             onClick={(_) => setPlay({ ...play, player: "O" })}
           >
