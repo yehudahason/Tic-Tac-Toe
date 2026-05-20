@@ -233,6 +233,13 @@ h4 {
   padding: 0.8rem 1.5rem;
   color: var(--color-slate-300);
 }
+.turn h1 {
+  font: var(--preset-4);
+  letter-spacing: var(--ls-4);
+  color: var(--color-slate-300);
+  text-align: center;
+  padding: 0.5rem;
+}
 .board {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

@@ -151,7 +151,7 @@ export default function Game({
             alt=""
             aria-hidden="true"
           />
-          <span> TURN</span>
+          <h1> TURN</h1>
         </div>
         <button
           type="button"
