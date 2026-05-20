@@ -38,7 +38,7 @@ export default function Menu({
         <div className="mark-icons">
           <button
             type="button"
-            aria-label="X mark selected"
+            aria-label="choose X"
             className={`x bg ${play.player === "X" && "active"} `}
             onClick={(_) => setPlay({ ...play, player: "X" })}
           >
@@ -46,7 +46,7 @@ export default function Menu({
           </button>
           <button
             type="button"
-            aria-label="O mark selected"
+            aria-label="choose O"
             className={`o bg ${play.player === "O" && "active"}`}
             onClick={(_) => setPlay({ ...play, player: "O" })}
           >
