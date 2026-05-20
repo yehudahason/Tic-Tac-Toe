@@ -1,5 +1,5 @@
 import getGameState from "./getGameState";
-import type { squaresType } from "../types/types";
+import type { squaresType } from "../types";
 
 /**
  * Intermediate CPU Logic:

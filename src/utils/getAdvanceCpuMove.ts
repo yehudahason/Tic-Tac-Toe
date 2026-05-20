@@ -1,4 +1,4 @@
-import type { squaresType } from "../types/types";
+import type { squaresType } from "../types";
 
 /**
  * Minimax Algorithm for Tic-Tac-Toe

@@ -5,11 +5,11 @@ import {
   type playType,
   type players,
   type results,
-} from "../types/types";
+} from "../types";
 import isNulled from "../utils/isNulled";
 import getGameState from "../utils/getGameState";
-import interCpuMove from "../utils/intermediateCpuMove";
-import getAdvanceMove from "../utils/advanceCpuMove";
+import interCpuMove from "../utils/getIntermediateCpuMove";
+import getAdvanceMove from "../utils/getAdvanceCpuMove";
 import getRandomMove from "../utils/getRandomMove";
 
 export default function Game({

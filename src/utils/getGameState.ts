@@ -1,5 +1,5 @@
 import calculateWinner from "./calculateWinner";
-import type { gameStateType, squaresType } from "../types/types";
+import type { gameStateType, squaresType } from "../types";
 /**
  * Processes a move and returns the updated game state.
  */

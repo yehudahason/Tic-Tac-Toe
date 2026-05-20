@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { type gameStateType, type squaresType } from "../types/types";
+import { type gameStateType, type squaresType } from "../types";
 import { FocusTrap } from "focus-trap-react";
 
 export default function RestartBanner({

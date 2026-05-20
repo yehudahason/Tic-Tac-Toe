@@ -3,7 +3,7 @@
  * @param {Array} squares - An array of 9 strings (e.g., ['X', 'O', null, ...])
  * @returns {string|null} - Returns 'X', 'O', or null if no winner yet.
  */
-import type { winner } from "../types/types";
+import type { winner } from "../types";
 function calculateWinner(squares: ("X" | "O" | null)[]): winner | null {
   const lines = [
     [0, 1, 2],

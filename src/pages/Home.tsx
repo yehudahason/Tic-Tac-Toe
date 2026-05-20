@@ -8,7 +8,7 @@ import {
   type squaresType,
   type players,
   type results,
-} from "../types/types";
+} from "../types";
 import EndGameBanner from "../components/EndGameBanner";
 import RestartBanner from "../components/RestartBanner";
 

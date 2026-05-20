@@ -1,4 +1,4 @@
-import type { gameStateType, playType, players } from "../types/types";
+import type { gameStateType, playType, players } from "../types";
 
 export default function Menu({
   play,
