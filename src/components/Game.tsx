@@ -145,22 +145,28 @@ export default function Game({
     <section className="game">
       <div className="head">
         <img src={`${baseUrl}/assets/logo.svg`} alt="logo" />
+
+        {/* The Visual Turn Display - Hidden from screen readers to prevent double-reading */}
         <div className="turn" aria-live="polite">
           <img
             src={`${baseUrl}/assets/icon-${turn}.svg`}
             alt=""
             aria-hidden="true"
           />
-          <h1> TURN</h1>
+          <h1>
+            {" "}
+            TURN <span className="sr-only">{turn.toUpperCase()}</span>
+          </h1>
         </div>
         <button
+          aria-label="Restart game"
           type="button"
           className="restart"
           onClick={(_) => {
             handleRestart();
           }}
         >
-          <img src={`${baseUrl}/assets/icon-restart.svg`} alt="restart" />
+          <img src={`${baseUrl}/assets/icon-restart.svg`} alt="" />
         </button>
       </div>
       <div className="board">
